@@ -33,8 +33,7 @@ function fillLine(month, day, year, line) {
   let iframe = document.getElementById("Iframe9");
   let iframe2 = iframe.contentWindow.document.getElementById("aspnetForm");
   Object.keys(lineObjects).forEach(item => {
-    iframe2.contentWindow.document.querySelector(item).value =
-      lineObjects[item];
+    iframe.contentWindow.document.querySelector(item).value = lineObjects[item];
   });
 }
 
