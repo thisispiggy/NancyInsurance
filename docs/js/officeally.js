@@ -31,10 +31,8 @@ function fillLine(month, day, year, line) {
     place: 11
   };
   Object.keys(lineObjects).forEach(item => {
-    // eslint-disable-next-line no-console
-    console.log(item);
-    // eslint-disable-next-line no-console
-    console.log(lineObjects[item]);
+    let iframe = document.getElementById("aspnetForm");
+    iframe.contentWindow.document.querySelector(item).value = lineObjects[item];
   });
 }
 
