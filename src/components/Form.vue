@@ -93,7 +93,7 @@ export default {
     },
     generate() {
       let initScriptUrl =
-        "https://thisispiggy.github.io/NancyInsurance/js/script.js";
+        "https://thisispiggy.github.io/NancyInsurance/js/officeally.js";
       let configString = JSON.stringify({
         website: this.website,
         dates: this.dates,
@@ -108,7 +108,7 @@ export default {
       });
 
       this.bScript = encodeURIComponent(
-        `var BOOKMARKLET_CONFIG =${configString};var s = document.createElement("script");s.type = "text/javascript";s.src="${initScriptUrl}";document.body.appendChild(s);`
+        `var BOOKMARK =${configString};var s = document.createElement("script");s.type = "text/javascript";s.src="${initScriptUrl}";document.body.appendChild(s);`
       );
     }
   }
