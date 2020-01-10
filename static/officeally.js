@@ -30,9 +30,11 @@ function fillLine(month, day, year, line) {
     toYear: year,
     place: 11
   };
+  let iframe = document.getElementById("Iframe9");
+  let iframe2 = iframe.contentWindow.document.getElementById("aspnetForm");
   Object.keys(lineObjects).forEach(item => {
-    let iframe = document.getElementById("aspnetForm");
-    iframe.contentWindow.document.querySelector(item).value = lineObjects[item];
+    iframe2.contentWindow.document.querySelector(item).value =
+      lineObjects[item];
   });
 }
 
@@ -42,6 +44,7 @@ function fillLine(month, day, year, line) {
 // ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_DOS_DIAG_CODE0;
 // ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_DOS_CHRG0;
 // ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_UNITS0;
+// iframe.contentWindow.document.querySelector('#ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_FM_DATE_OF_SVC_MONTH').value = lineObjects[item];
 
 if (BOOKMARK) {
   let s = document.createElement("script");
@@ -52,7 +55,7 @@ if (BOOKMARK) {
     document.body.appendChild(s);
     BOOKMARK.fillDate();
   } catch (e) {
-    s.text = code;
+    s.text = BOOKMARK.fillDate;
     document.body.appendChild(s);
   }
 }
