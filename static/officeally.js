@@ -14,27 +14,25 @@ BOOKMARK.fillDate = () => {
 function fillLine(month, day, year, line) {
   let lineBase =
     "#ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_";
-  let fromMonth = lineBase + "FM_DATE_OF_SVC_MONTH" + line;
-  let fromDay = lineBase + "FM_DATE_OF_SVC_DAY" + line;
-  let fromYear = lineBase + "FM_DATE_OF_SVC_YEAR" + line;
-  let toMonth = lineBase + "TO_DATE_OF_SVC_MONTH" + line;
-  let toDay = lineBase + "TO_DATE_OF_SVC_DAY" + line;
-  let toYear = lineBase + "TO_DATE_OF_SVC_YEAR" + line;
-  let place = lineBase + "PLACE_OF_SVC" + line;
-  let lineObjects = {
-    fromMonth: month,
-    fromDay: day,
-    fromYear: year,
-    toMonth: month,
-    toDay: day,
-    toYear: year,
-    place: 11
-  };
+
+  let lineObjects = [
+    {
+      name: "fromMonth",
+      html: lineBase + "FM_DATE_OF_SVC_MONTH" + line,
+      data: month
+    }
+  ];
   let iframe = document.getElementById("Iframe9");
   let iframe2 = iframe.contentWindow.document.getElementById("aspnetForm");
-  Object.keys(lineObjects).forEach(item => {
-    iframe.contentWindow.document.querySelector(item).value = lineObjects[item];
+  lineObjects.forEach(object => {
+    // eslint-disable-next-line no-console
+    console.log(object);
+    iframe.contentWindow.document.querySelector(object.html).value =
+      object.data;
   });
+  // Object.keys(lineObjects).forEach(item => {
+  //   iframe.contentWindow.document.querySelector(item).value = lineObjects[item];
+  // });
 }
 
 // ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_EMG0;
@@ -44,6 +42,23 @@ function fillLine(month, day, year, line) {
 // ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_DOS_CHRG0;
 // ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_UNITS0;
 // iframe.contentWindow.document.querySelector('#ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_FM_DATE_OF_SVC_MONTH').value = lineObjects[item];
+// let fromMonth = lineBase + "FM_DATE_OF_SVC_MONTH" + line; //needs to be able to const object from variable outside
+// let fromDay = lineBase + "FM_DATE_OF_SVC_DAY" + line;
+// let fromYear = lineBase + "FM_DATE_OF_SVC_YEAR" + line;
+// let toMonth = lineBase + "TO_DATE_OF_SVC_MONTH" + line;
+// let toDay = lineBase + "TO_DATE_OF_SVC_DAY" + line;
+// let toYear = lineBase + "TO_DATE_OF_SVC_YEAR" + line;
+// let place = lineBase + "PLACE_OF_SVC" + line;
+
+// {
+//   fromMonth: month,
+//   fromDay: day,
+//   fromYear: year,
+//   toMonth: month,
+//   toDay: day,
+//   toYear: year,
+//   place: 11
+// };
 
 if (BOOKMARK) {
   let s = document.createElement("script");
