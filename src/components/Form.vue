@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-card max-width="1000px" class="mx-auto">
       <v-card-text>
-        <v-select v-model="radiogroup" :items="sites" label="Website"></v-select>
+        <v-select v-model="website" :items="sites" label="Website"></v-select>
 
         <v-textarea v-model="dates" label="Dates"></v-textarea>
 
@@ -18,7 +18,7 @@
           </v-flex>
         </v-layout>
 
-        <v-select v-model="radiogroup" :items="diagnosis" label="Diagnosis Code"></v-select>
+        <v-select v-model="diagnosisCode" :items="diagnosis" label="Diagnosis Code"></v-select>
 
         <v-btn @click="submit">Generate</v-btn>
         <v-spacer></v-spacer>
@@ -33,10 +33,11 @@
 export default {
   name: "Form",
   data: () => ({
-    radiogroup: "test",
+    website: "",
     dates: "",
     sites: ["Availity", "OfficeAlly", "United Health Care"],
     diagnosis: [1, 2, 3, 4, 5],
+    diagnosisCode: "",
     cpt: [
       {
         label: 99203,
@@ -93,7 +94,18 @@ export default {
     generate() {
       let initScriptUrl =
         "https://rawgit.com/nfleury/bookmarklet-generator/master/static/bookmarklet-init.js";
-      let configString = JSON.stringify({ script: this.script });
+      let configString = JSON.stringify({
+        website: this.website,
+        dates: this.dates,
+        diagnosisCode: this.diagnosisCode,
+        cpt: this.cpt,
+        a99203: this.a99203,
+        a97813: this.a97813,
+        a97814: this.a97814,
+        a99213: this.a99213,
+        a97140: this.a97140,
+        a97124: this.a97124
+      });
 
       this.bScript = encodeURIComponent(
         `var BOOKMARKLET_CONFIG =${configString};var s = document.createElement("script");s.type = "text/javascript";s.src="${initScriptUrl}";document.body.appendChild(s);`
