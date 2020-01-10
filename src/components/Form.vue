@@ -13,8 +13,28 @@
         </v-layout>
 
         <v-layout wrap>
-          <v-flex lg12 v-for="code in cpt" v-bind:key="code.label">
-            <v-text-field v-model="code.content" :label="code.label" v-if="code.checked"></v-text-field>
+          <v-flex xs12 sm2 v-for="code in cpt" v-bind:key="code.label" outlined>
+            <v-text-field
+              v-model="code.modifier"
+              label="Modifier"
+              v-if="code.checked"
+              class="mr-3 my-0"
+              outlined
+            ></v-text-field>
+            <v-text-field
+              v-model="code.cost"
+              label="Cost in $"
+              v-if="code.checked"
+              class="mr-3 my-0"
+              outlined
+            ></v-text-field>
+            <v-text-field
+              v-model="code.unit"
+              label="Units"
+              v-if="code.checked"
+              class="mr-3"
+              outlined
+            ></v-text-field>
           </v-flex>
         </v-layout>
 
@@ -42,40 +62,46 @@ export default {
       {
         label: 99203,
         checked: false,
-        content: "25, $65, 1"
+        modifier: "25",
+        cost: "65",
+        unit: "1"
       },
       {
         label: 97813,
         checked: false,
-        content: "25, $65, 1"
+        modifier: "25",
+        cost: "65",
+        unit: "1"
       },
       {
         label: 97814,
         checked: false,
-        content: "25, $65, 1"
+        modifier: "25",
+        cost: "65",
+        unit: "1"
       },
       {
         label: 99213,
         checked: false,
-        content: "25, $65, 1"
+        modifier: "25",
+        cost: "65",
+        unit: "1"
       },
       {
         label: 97140,
         checked: false,
-        content: "25, $65, 1"
+        modifier: "25",
+        cost: "65",
+        unit: "1"
       },
       {
         label: 97124,
         checked: false,
-        content: "25, $65, 1"
+        modifier: "25",
+        cost: "65",
+        unit: "1"
       }
     ],
-    a99203: "25, $65.00, 1",
-    a97813: "25, $65.00, 1",
-    a97814: "25, $65.00, 1",
-    a99213: "25, $65.00, 1",
-    a97140: "25, $65.00, 1",
-    a97124: "25, $65.00, 1",
     btnShow: false,
     script: "",
     iframe: ""
@@ -98,13 +124,7 @@ export default {
         website: this.website,
         dates: this.dates,
         diagnosisCode: this.diagnosisCode,
-        cpt: this.cpt,
-        a99203: this.a99203,
-        a97813: this.a97813,
-        a97814: this.a97814,
-        a99213: this.a99213,
-        a97140: this.a97140,
-        a97124: this.a97124
+        cpt: this.cpt
       });
 
       this.bScript = encodeURIComponent(
