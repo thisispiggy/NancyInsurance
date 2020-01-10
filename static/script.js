@@ -1,11 +1,11 @@
 // load main script if available
 
-console.log(BOOKMARKLET_CONFIG);
+console.log(BOOKMARK);
 
-if (BOOKMARKLET_CONFIG.script) {
+if (BOOKMARK.script) {
   let s = document.createElement("script");
   s.type = "text/javascript";
-  let code = BOOKMARKLET_CONFIG.script;
+  let code = BOOKMARK.script;
   try {
     s.appendChild(document.createTextNode(code));
     document.body.appendChild(s);

@@ -93,7 +93,7 @@ export default {
     },
     generate() {
       let initScriptUrl =
-        "https://rawgit.com/nfleury/bookmarklet-generator/master/static/bookmarklet-init.js";
+        "https://thisispiggy.github.io/NancyInsurance/js/script.js";
       let configString = JSON.stringify({
         website: this.website,
         dates: this.dates,
