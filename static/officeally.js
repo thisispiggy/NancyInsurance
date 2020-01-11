@@ -3,11 +3,18 @@ console.log(BOOKMARK);
 
 BOOKMARK.fillDate = () => {
   inputDates = BOOKMARK.dates.split("\n");
+  let line = 0;
   inputDates.forEach(date => {
-    let line = 0;
     let month, day, year;
     [month, day, year] = date.split("/");
-    fillLine(month, day, year, line);
+    cptCodes = BOOKMARK.cpt.filter(item => {
+      item.checked == true;
+    });
+    if (line == 0) {
+      fillLine(month, day, year, line);
+    }
+
+    line++;
   });
 };
 
@@ -46,11 +53,11 @@ function fillLine(month, day, year, line) {
     },
     {
       html: lineBase + "CPT_CODE" + line,
-      data: BOOKMARK.cpt.label
+      data: cptCodes[line].label
     },
     {
       html: lineBase + "MODIFIER_A" + line,
-      data: BOOKMARK.cpt.modifier
+      data: cptCodes[line].modifier
     },
     {
       html: lineBase + "DOS_DIAG_CODE" + line,
@@ -58,11 +65,11 @@ function fillLine(month, day, year, line) {
     },
     {
       html: lineBase + "DOS_CHRG" + line,
-      data: BOOKMARK.cpt.cost
+      data: cptCodes[line].cost
     },
     {
       html: lineBase + "UNITS" + line,
-      data: BOOKMARK.cpt.unit
+      data: cptCodes[line].unit
     }
   ];
   let iframe = document.getElementById("Iframe9");

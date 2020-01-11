@@ -67,6 +67,13 @@ export default {
         unit: "1"
       },
       {
+        label: 99213,
+        checked: false,
+        modifier: "25",
+        cost: "65",
+        unit: "1"
+      },
+      {
         label: 97813,
         checked: false,
         modifier: "25",
@@ -75,13 +82,6 @@ export default {
       },
       {
         label: 97814,
-        checked: false,
-        modifier: "25",
-        cost: "65",
-        unit: "1"
-      },
-      {
-        label: 99213,
         checked: false,
         modifier: "25",
         cost: "65",
