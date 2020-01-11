@@ -9,6 +9,8 @@ BOOKMARK.fillDate = () => {
     let cptCodes = BOOKMARK.cpt.filter(item => {
       item.checked == true;
     });
+    // eslint-disable-next-line no-console
+    console.log(cptCodes);
     fillLine(month, day, year, line, cptCodes);
     line++;
   });
