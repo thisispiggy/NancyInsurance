@@ -2,15 +2,15 @@
 
 BOOKMARK.fillDate = () => {
   inputDates = BOOKMARK.dates.split("\n");
+  let cptCodes = BOOKMARK.cpt.filter(item => {
+    item.checked == true;
+  });
+  // eslint-disable-next-line no-console
+  console.log(cptCodes);
   let line = 0;
   inputDates.forEach(date => {
     let month, day, year;
     [month, day, year] = date.split("/");
-    let cptCodes = BOOKMARK.cpt.filter(item => {
-      item.checked == true;
-    });
-    // eslint-disable-next-line no-console
-    console.log(cptCodes);
     fillLine(month, day, year, line, cptCodes);
     line++;
   });
