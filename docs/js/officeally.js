@@ -6,15 +6,15 @@ BOOKMARK.fillDate = () => {
   inputDates.forEach(date => {
     let month, day, year;
     [month, day, year] = date.split("/");
-    cptCodes = BOOKMARK.cpt.filter(item => {
+    let cptCodes = BOOKMARK.cpt.filter(item => {
       item.checked == true;
     });
-    fillLine(month, day, year, line);
+    fillLine(month, day, year, line, cptCodes);
     line++;
   });
 };
 
-function fillLine(month, day, year, line) {
+function fillLine(month, day, year, line, cptCodes) {
   let lineBase =
     "#ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_";
 
