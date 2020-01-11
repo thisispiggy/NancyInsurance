@@ -1,5 +1,4 @@
 // eslint-disable-next-line no-console
-console.log(BOOKMARK);
 
 BOOKMARK.fillDate = () => {
   inputDates = BOOKMARK.dates.split("\n");
@@ -10,10 +9,7 @@ BOOKMARK.fillDate = () => {
     cptCodes = BOOKMARK.cpt.filter(item => {
       item.checked == true;
     });
-    if (line == 0) {
-      fillLine(month, day, year, line);
-    }
-
+    fillLine(month, day, year, line);
     line++;
   });
 };
