@@ -11,9 +11,7 @@ BOOKMARK.fillDate = () => {
     [month, day, year] = date.split("/");
     if (line == 0) {
       let codes = cptCodes.filter(cptCode => {
-        cptCode.label != 99213;
-        // eslint-disable-next-line no-console
-        console.log("test" + cptCode);
+        return cptCode.label != 99213;
       });
       codes.forEach(cptCode => {
         // eslint-disable-next-line no-console
@@ -21,7 +19,9 @@ BOOKMARK.fillDate = () => {
         fillLine(month, day, year, line, cptCode);
       });
     } else {
-      let codes = cptCodes.filter(cptCode => cptCode.label != 99203);
+      let codes = cptCodes.filter(cptCode => {
+        return cptCode.label != 99203;
+      });
       codes.forEach(cptCode => {
         // eslint-disable-next-line no-console
         console.log("99213" + cptCode);
