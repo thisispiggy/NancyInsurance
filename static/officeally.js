@@ -5,13 +5,17 @@ BOOKMARK.fillDate = () => {
   const cptCodes = BOOKMARK.cpt.filter(item => item.checked == true);
   // eslint-disable-next-line no-console
   console.log(cptCodes);
-  let line = 0;
+  const line = 0;
   inputDates.forEach(date => {
     let month, day, year;
     [month, day, year] = date.split("/");
     if (line == 0) {
       cptCodes
-        .filter(cptCode => cptCode.label != 99213)
+        .filter(cptCode => {
+          cptCode.label != 99213;
+          // eslint-disable-next-line no-console
+          console.log("test" + cptCode);
+        })
         .forEach(cptCode => {
           // eslint-disable-next-line no-console
           console.log("99203" + cptCode);
