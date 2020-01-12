@@ -28,7 +28,7 @@ BOOKMARK.fillDate = () => {
   });
 };
 
-function fillLine(month, day, year, line, cptCodes) {
+function fillLine(month, day, year, line, cptCode) {
   let lineBase =
     "#ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_";
 
