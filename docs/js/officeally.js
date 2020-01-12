@@ -13,17 +13,19 @@ BOOKMARK.fillDate = () => {
       cptCodes
         .filter(cptCode => cptCode.label != 99213)
         .forEach(cptCode => {
+          // eslint-disable-next-line no-console
+          console.log("99203" + cptCode);
           fillLine(month, day, year, line, cptCode);
         });
     } else {
       cptCodes
         .filter(cptCode => cptCode.label != 99203)
         .forEach(cptCode => {
+          // eslint-disable-next-line no-console
+          console.log("99213" + cptCode);
           fillLine(month, day, year, line, cptCode);
         });
     }
-    cptCodes;
-
     line++;
   });
 };
