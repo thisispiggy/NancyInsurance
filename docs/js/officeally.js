@@ -10,25 +10,23 @@ BOOKMARK.fillDate = () => {
     let month, day, year;
     [month, day, year] = date.split("/");
     if (line == 0) {
-      cptCodes
-        .filter(cptCode => {
-          cptCode.label != 99213;
-          // eslint-disable-next-line no-console
-          console.log("test" + cptCode);
-        })
-        .forEach(cptCode => {
-          // eslint-disable-next-line no-console
-          console.log("99203" + cptCode);
-          fillLine(month, day, year, line, cptCode);
-        });
+      let codes = cptCodes.filter(cptCode => {
+        cptCode.label != 99213;
+        // eslint-disable-next-line no-console
+        console.log("test" + cptCode);
+      });
+      codes.forEach(cptCode => {
+        // eslint-disable-next-line no-console
+        console.log("99203" + cptCode);
+        fillLine(month, day, year, line, cptCode);
+      });
     } else {
-      cptCodes
-        .filter(cptCode => cptCode.label != 99203)
-        .forEach(cptCode => {
-          // eslint-disable-next-line no-console
-          console.log("99213" + cptCode);
-          fillLine(month, day, year, line, cptCode);
-        });
+      let codes = cptCodes.filter(cptCode => cptCode.label != 99203);
+      codes.forEach(cptCode => {
+        // eslint-disable-next-line no-console
+        console.log("99213" + cptCode);
+        fillLine(month, day, year, line, cptCode);
+      });
     }
     line++;
   });
