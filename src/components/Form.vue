@@ -70,36 +70,36 @@ export default {
         label: 99213,
         checked: false,
         modifier: "25",
-        cost: "65",
+        cost: "45",
         unit: "1"
       },
       {
         label: 97813,
         checked: false,
-        modifier: "25",
-        cost: "65",
+        modifier: "",
+        cost: "75",
         unit: "1"
       },
       {
         label: 97814,
         checked: false,
-        modifier: "25",
-        cost: "65",
-        unit: "1"
+        modifier: "",
+        cost: "180",
+        unit: "3"
       },
       {
         label: 97140,
         checked: false,
-        modifier: "25",
-        cost: "65",
-        unit: "1"
+        modifier: "GP",
+        cost: "60",
+        unit: "4"
       },
       {
         label: 97124,
         checked: false,
-        modifier: "25",
-        cost: "65",
-        unit: "1"
+        modifier: "GP",
+        cost: "60",
+        unit: "2"
       }
     ],
     btnShow: false,

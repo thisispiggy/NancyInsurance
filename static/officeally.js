@@ -1,39 +1,3 @@
-// eslint-disable-next-line no-console
-
-BOOKMARK.fillDate = () => {
-  inputDates = BOOKMARK.dates.split("\n");
-  const cptCodes = BOOKMARK.cpt.filter(item => item.checked == true);
-  // eslint-disable-next-line no-console
-  console.log(inputDates);
-  // eslint-disable-next-line no-console
-  console.log(cptCodes);
-  let line = 0;
-  inputDates.forEach(date => {
-    let month, day, year;
-    [month, day, year] = date.split("/");
-    if (line == 0) {
-      let codes = cptCodes.filter(cptCode => {
-        return cptCode.label != 99213;
-      });
-      codes.forEach(cptCode => {
-        // eslint-disable-next-line no-console
-        // console.log("99203" + cptCode);
-        fillLine(month, day, year, line, cptCode);
-      });
-    } else {
-      let codes = cptCodes.filter(cptCode => {
-        return cptCode.label != 99203;
-      });
-      codes.forEach(cptCode => {
-        // eslint-disable-next-line no-console
-        console.log("99213" + cptCode);
-        fillLine(month, day, year, line, cptCode);
-      });
-    }
-    line++;
-  });
-};
-
 function fillLine(month, day, year, line, cptCode) {
   let lineBase =
     "#ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_";
@@ -99,6 +63,44 @@ function fillLine(month, day, year, line, cptCode) {
   //   iframe.contentWindow.document.querySelector(item).value = lineObjects[item];
   // });
 }
+
+BOOKMARK.fillDate = () => {
+  inputDates = BOOKMARK.dates.split("\n");
+  const cptCodes = BOOKMARK.cpt.filter(item => item.checked == true);
+  // eslint-disable-next-line no-console
+  console.log("dates:" + inputDates);
+  // eslint-disable-next-line no-console
+  console.log("all codes:" + cptCodes);
+
+  let line = 0;
+  inputDates.forEach(date => {
+    let month, day, year;
+    [month, day, year] = date.split("/");
+
+    if (line == 0) {
+      let codes = cptCodes.filter(cptCode => {
+        return cptCode.label != 99213;
+      });
+      codes.forEach(cptCode => {
+        // eslint-disable-next-line no-console
+        // console.log("99203" + cptCode);
+        fillLine(month, day, year, line, cptCode);
+        line++;
+      });
+    } else {
+      let codes = cptCodes.filter(cptCode => {
+        return cptCode.label != 99203;
+      });
+
+      codes.forEach(cptCode => {
+        // eslint-disable-next-line no-console
+        console.log("99213" + cptCode);
+        fillLine(month, day, year, line, cptCode);
+        line++;
+      });
+    }
+  });
+};
 
 // ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_EMG0;
 // ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_CPT_CODE0;
