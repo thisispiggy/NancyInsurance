@@ -97,6 +97,8 @@ BOOKMARK.fillDate = () => {
         console.log("99213" + cptCode);
         fillLine(month, day, year, line, cptCode);
         line++;
+        // eslint-disable-next-line no-console
+        console.log(line);
       });
     }
   });
