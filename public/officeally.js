@@ -67,6 +67,11 @@ function fillLine(month, day, year, line, cptCode) {
 BOOKMARK.fillDate = () => {
   inputDates = BOOKMARK.dates.split("\n");
   const cptCodes = BOOKMARK.cpt.filter(item => item.checked == true);
+  const rowNumbers = inputDates.length + cptCodes.length + 1;
+  for (let i; i < rowNumbers; i++) {
+    HCFALineItemTableManager.AddRows();
+  }
+
   // eslint-disable-next-line no-console
   console.log("dates:" + inputDates);
   // eslint-disable-next-line no-console
