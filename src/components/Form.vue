@@ -118,8 +118,22 @@ export default {
       this.iframe = document.getElementById("aspnetForm");
     },
     generate() {
-      let initScriptUrl =
-        "https://thisispiggy.github.io/NancyInsurance/js/officeally.js";
+      let initScriptUrl;
+      switch (this.website) {
+        case "Availity":
+          initScriptUrl =
+            "https://thisispiggy.github.io/NancyInsurance/js/availity.js";
+          break;
+        case "OfficeAlly":
+          initScriptUrl =
+            "https://thisispiggy.github.io/NancyInsurance/js/officeally.js";
+          break;
+        default:
+          initScriptUrl =
+            "https://thisispiggy.github.io/NancyInsurance/js/united.js";
+          break;
+      }
+
       let configString = JSON.stringify({
         website: this.website,
         dates: this.dates,
