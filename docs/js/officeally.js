@@ -4,8 +4,10 @@ BOOKMARK.fillDate = () => {
   inputDates = BOOKMARK.dates.split("\n");
   const cptCodes = BOOKMARK.cpt.filter(item => item.checked == true);
   // eslint-disable-next-line no-console
+  console.log(inputDates);
+  // eslint-disable-next-line no-console
   console.log(cptCodes);
-  const line = 0;
+  let line = 0;
   inputDates.forEach(date => {
     let month, day, year;
     [month, day, year] = date.split("/");
@@ -15,7 +17,7 @@ BOOKMARK.fillDate = () => {
       });
       codes.forEach(cptCode => {
         // eslint-disable-next-line no-console
-        console.log("99203" + cptCode);
+        // console.log("99203" + cptCode);
         fillLine(month, day, year, line, cptCode);
       });
     } else {
