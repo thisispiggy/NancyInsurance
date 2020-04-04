@@ -5,7 +5,7 @@
         <label class="label">1. Select Website</label>
         <div class="control has-icons-left">
           <div class="select is-primary">
-            <select placeholder="Select">
+            <select placeholder="Select" v-model="website">
               <option v-for="site in sites" v-bind:key="site">
                 {{
                 site
@@ -84,7 +84,7 @@
         <label class="label">4. Select Diagnosis Codes</label>
         <div class="control has-icons-left">
           <div class="select is-primary">
-            <select placeholder="Select">
+            <select placeholder="Select" v-model="diagnosisCode">
               <option v-for="number in diagnosis" v-bind:key="number">
                 {{
                 number
@@ -191,7 +191,7 @@ export default {
 
       let configString = JSON.stringify({
         website: this.website,
-        dates: this.dates,
+        dates: this.formattedDate,
         diagnosisCode: this.diagnosisCode,
         cpt: this.cpt
       });

@@ -71,8 +71,18 @@ BOOKMARK.fillDate = () => {
   const rowNumbers = inputDates.length + cptCodes.length + 1;
   for (let i; i < rowNumbers; i++) {
     HCFALineItemTableManager.AddRows();
-  }
+  }}
 
+    const letters = {
+      1: "A",
+      2: "B",
+      3: "C",
+      4: "D",
+      5: "E",
+      6: "F",
+    }
+    
+    BOOKMARK.diagnosisCode = letters[BOOKMARK.diagnosisCode]
   // eslint-disable-next-line no-console
   console.log("dates:" + inputDates);
   // eslint-disable-next-line no-console
@@ -112,13 +122,7 @@ BOOKMARK.fillDate = () => {
   });
 };
 
-// ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_EMG0;
-// ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_CPT_CODE0;
-// ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_MODIFIER_A0;
-// ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_DOS_DIAG_CODE0;
-// ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_DOS_CHRG0;
-// ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_UNITS0;
-// iframe.contentWindow.document.querySelector('#ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_FM_DATE_OF_SVC_MONTH').value = lineObjects[item];
+
 
 if (BOOKMARK) {
   let s = document.createElement("script");
