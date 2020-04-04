@@ -1,58 +1,56 @@
 <template>
-  <v-container fluid>
-    <v-card max-width="1000px" class="mx-auto">
-      <v-card-text>
-        <v-select v-model="website" :items="sites" label="Website"></v-select>
+  <section class="section main">
+    <div class="content"></div>
+    <div class="card content">
+      <div class="container">
+        <b-field label="Website">
+          <b-select v-model="website">
+            <option value="availity">Availity</option>
+            <option value="officeally">OfficeAlly</option>
+            <option value="united">United Health Care</option>
+          </b-select>
+        </b-field>
 
-        <!-- <v-textarea v-model="dates" label="Dates"></v-textarea> -->
+        <b-field label="Select a date">
+          <b-datepicker placeholder="Click to select..." multiple></b-datepicker>
+        </b-field>
 
-        <template v-slot:activator="{ on }">
-          <v-text-field v-model="dates" v-on="on"></v-text-field>
-        </template>
+        <b-field>
+          <div v-for="code in cpt" v-bind:key="code.label">
+            <b-checkbox v-model="code.checked">{{ code.label }}</b-checkbox>
+          </div>
+        </b-field>
 
-        <v-date-picker v-model="dates" full-width landscape multiple color="grey darken-4"></v-date-picker>
+        <b-field>
+          <div v-for="code in cpt" v-bind:key="code.label" style="display:flex">
+            <div>
+              <b-input v-model="code.modifier" v-if="code.checked"></b-input>
+              <b-input v-model="code.cost" v-if="code.checked"></b-input>
+              <b-input v-model="code.unit" v-if="code.checked"></b-input>
+              <b-input v-model="code.modifier" v-if="code.checked"></b-input>
+            </div>
+          </div>
+        </b-field>
 
-        <v-layout wrap>
-          <v-flex xs12 sm6 lg2 v-for="code in cpt" v-bind:key="code.label">
-            <v-checkbox v-model="code.checked" :label="code.label"></v-checkbox>
-          </v-flex>
-        </v-layout>
+        <b-field label="Diagnosis Code">
+          <b-select v-model="diagnosisCode">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </b-select>
+        </b-field>
 
-        <v-layout wrap>
-          <v-flex xs12 sm2 v-for="code in cpt" v-bind:key="code.label" outlined>
-            <v-text-field
-              v-model="code.modifier"
-              label="Modifier"
-              v-if="code.checked"
-              class="mr-3 my-0"
-              outlined
-            ></v-text-field>
-            <v-text-field
-              v-model="code.cost"
-              label="Cost in $"
-              v-if="code.checked"
-              class="mr-3 my-0"
-              outlined
-            ></v-text-field>
-            <v-text-field
-              v-model="code.unit"
-              label="Units"
-              v-if="code.checked"
-              class="mr-3"
-              outlined
-            ></v-text-field>
-          </v-flex>
-        </v-layout>
+        <div class="field">
+          <div class="control">
+            <b-button @click="clickMe" class="is-primary">Submit</b-button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <v-select v-model="diagnosisCode" :items="diagnosis" label="Diagnosis Code"></v-select>
-
-        <v-btn @click="submit" depressed>Generate</v-btn>
-        <v-spacer></v-spacer>
-        <v-textarea v-model="bScript" disabled></v-textarea>
-        <v-btn v-if="btnShow" :href="'javascript: ' + bScript" depressed>Bookmark</v-btn>
-      </v-card-text>
-    </v-card>
-  </v-container>
+    <div class="content"></div>
+  </section>
 </template>
 
 <script>

@@ -65,7 +65,8 @@ function fillLine(month, day, year, line, cptCode) {
 }
 
 BOOKMARK.fillDate = () => {
-  inputDates = BOOKMARK.dates.split("\n");
+  // inputDates = BOOKMARK.dates.split("\n");
+  inputDates = BOOKMARK.dates;
   const cptCodes = BOOKMARK.cpt.filter(item => item.checked == true);
   const rowNumbers = inputDates.length + cptCodes.length + 1;
   for (let i; i < rowNumbers; i++) {
