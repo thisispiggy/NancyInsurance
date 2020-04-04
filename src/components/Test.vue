@@ -120,28 +120,28 @@ export default {
           label: 99203,
           checked: false,
           modifier: "25",
-          cost: "65",
+          cost: "75",
           unit: "1"
         },
         {
           label: 99213,
           checked: false,
           modifier: "25",
-          cost: "45",
+          cost: "55",
           unit: "1"
         },
         {
           label: 97813,
           checked: false,
           modifier: "",
-          cost: "75",
+          cost: "85",
           unit: "1"
         },
         {
           label: 97814,
           checked: false,
           modifier: "",
-          cost: "180",
+          cost: "210",
           unit: "3"
         },
         {
@@ -155,8 +155,8 @@ export default {
           label: 97124,
           checked: false,
           modifier: "GP",
-          cost: "60",
-          unit: "2"
+          cost: "50",
+          unit: "1"
         }
       ],
       btnShow: false,
