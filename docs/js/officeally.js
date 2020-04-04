@@ -75,11 +75,11 @@ BOOKMARK.fillDate = () => {
 
   const letters = {
     1: "A",
-    2: "B",
-    3: "C",
-    4: "D",
-    5: "E",
-    6: "F"
+    2: "AB",
+    3: "ABC",
+    4: "ABCD",
+    5: "ABCDE",
+    6: "ABCDEF"
   };
 
   BOOKMARK.diagnosisCode = letters[BOOKMARK.diagnosisCode];
