@@ -71,18 +71,18 @@ BOOKMARK.fillDate = () => {
   const rowNumbers = inputDates.length + cptCodes.length + 1;
   for (let i; i < rowNumbers; i++) {
     HCFALineItemTableManager.AddRows();
-  }}
+  }
 
-    const letters = {
-      1: "A",
-      2: "B",
-      3: "C",
-      4: "D",
-      5: "E",
-      6: "F",
-    }
-    
-    BOOKMARK.diagnosisCode = letters[BOOKMARK.diagnosisCode]
+  const letters = {
+    1: "A",
+    2: "B",
+    3: "C",
+    4: "D",
+    5: "E",
+    6: "F"
+  };
+
+  BOOKMARK.diagnosisCode = letters[BOOKMARK.diagnosisCode];
   // eslint-disable-next-line no-console
   console.log("dates:" + inputDates);
   // eslint-disable-next-line no-console
@@ -121,8 +121,6 @@ BOOKMARK.fillDate = () => {
     }
   });
 };
-
-
 
 if (BOOKMARK) {
   let s = document.createElement("script");
