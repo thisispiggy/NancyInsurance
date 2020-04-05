@@ -1,19 +1,14 @@
 <template>
-  <v-app>
-    <v-content>
-      <Test />
-    </v-content>
-  </v-app>
+  <Form />
 </template>
 
 <script>
-import Test from "./components/Test";
+import Form from "./components/Form";
 
 export default {
   name: "App",
-
   components: {
-    Test
+    Form
   },
 
   data: () => ({
