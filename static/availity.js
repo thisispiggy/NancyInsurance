@@ -1,8 +1,8 @@
-// eslint-disable-next-line no-undef
-({ website, dates, diagnosisCode, cpt } = BOOKMARK);
+// // eslint-disable-next-line no-undef
+// const { website, dates, diagnosisCode, cpt } = BOOKMARK;
 
 // eslint-disable-next-line no-undef
-iframe = document.getElementById("newBodyFrame");
+const iframe = document.getElementById("newBodyFrame");
 
 //Function for filling each line for each date
 const fillLine = (month, day, year, cpt) => {
@@ -75,15 +75,15 @@ const iterCpt = (month, day, year, cpts) => {
 };
 
 //filters cpt code to only have list of 99203
-const filter99203 = cpt.filter(cpt => cpt.label == 99203);
+const filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
 
 //Function for each date
 const fillDate = () => {
-  dates.forEach(date => {
+  BOOKMARK.dates.forEach(date => {
     let [month, day, year] = date.split("/");
     // eslint-disable-next-line no-console
-    console.log(cpt);
-    fillLine(month, day, year, cpt);
+    console.log(BOOKMARK.cpt);
+    fillLine(month, day, year, BOOKMARK.cpt);
 
     // let line = 0;
 
