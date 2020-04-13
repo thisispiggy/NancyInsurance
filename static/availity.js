@@ -1,4 +1,4 @@
-const { placeholder, dates, diagnosisCode, cpt } = BOOKMARK;
+({ website, dates, diagnosisCode, cpt } = BOOKMARK);
 
 const iframe = document.getElementById("newBodyFrame");
 
