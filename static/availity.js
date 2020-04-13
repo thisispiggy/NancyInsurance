@@ -79,7 +79,8 @@ const filter99203 = cpt.filter(cpt => cpt.label == 99203);
 const fillDate = () => {
   dates.forEach(date => {
     let [month, day, year] = date.split("/");
-
+    // eslint-disable-next-line no-console
+    console.log(cpt);
     fillLine(month, day, year, cpt);
 
     // let line = 0;
