@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 ({ website, dates, diagnosisCode, cpt } = BOOKMARK);
 
 const iframe = document.getElementById("newBodyFrame");
