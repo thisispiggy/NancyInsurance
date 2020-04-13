@@ -2,7 +2,7 @@
 // const { website, dates, diagnosisCode, cpt } = BOOKMARK;
 
 // eslint-disable-next-line no-undef
-const iframe = document.getElementById("newBodyFrame");
+iframe = document.getElementById("newBodyFrame");
 
 //Function for filling each line for each date
 const fillLine = (month, day, year, cpt) => {
