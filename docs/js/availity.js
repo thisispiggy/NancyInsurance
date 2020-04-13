@@ -5,7 +5,8 @@
 iframe = document.getElementById("newBodyFrame");
 
 //Function for filling each line for each date
-const fillLine = (month, day, year, cpt) => {
+// eslint-disable-next-line no-undef
+fillLine = (month, day, year, cpt) => {
   const lineBase =
     "componentListPanel:componentListView:31:component:claimLineForm:componentListPanel:componentListView:0:component:";
   const lineObjects = [
