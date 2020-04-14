@@ -47,10 +47,6 @@ fillLine = (month, day, year, cpt) => {
       data: cpt.modifier
     },
     {
-      html: "diagnosisCodePointer1Container:diagnosisCodePointer1",
-      data: diagnosisCode
-    },
-    {
       html: "chargesContainer:charges",
       data: cpt.cost
     },
@@ -65,6 +61,23 @@ fillLine = (month, day, year, cpt) => {
 
     iframe.contentWindow.document.getElementsByName(object.html)[0].value =
       object.data;
+
+    document.getElementById(
+      lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer1"
+    ).selectedIndex = "1";
+    document.getElementById(
+      lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer2"
+    ).selectedIndex = "2";
+    document.getElementById(
+      lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer3"
+    ).selectedIndex = "3";
+    document.getElementById(
+      lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer4"
+    ).selectedIndex = "4";
+
+    setTimeout(() => {
+      iframe.contentWindow.document.getElementById("saveServiceLine").click();
+    }, 2000);
   });
 };
 
@@ -80,29 +93,18 @@ filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
 
 //Function for each date
 fillDate = () => {
+  let line = 0;
   BOOKMARK.dates.forEach(date => {
     let [month, day, year] = date.split("/");
-    // eslint-disable-next-line no-console
-    console.log("filling each line now");
-    fillLine(month, day, year, cpt);
-    console.log(cpt);
-
-    setTimeout(() => {
-      iframe.contentWindow.document.getElementById("saveServiceLine").click();
-    }, 2000);
-
-    // let line = 0;
 
     // if first line and 99203 checked, filter out 99213, else filter out 99203
-    /*
     if (line == 0 && filter99203[0].checked) {
-      const codes = cpt.filter(cpt => cpt.label !== 99213);
+      let codes = cpt.filter(cpt => cpt.label !== 99213);
       iterCpt(month, day, year, codes);
     } else {
-      const codes = cpt.filter(cpt => cpt.label !== 99203);
-      iterCpt(month, day, year, cpt);
+      let codes = cpt.filter(cpt => cpt.label !== 99203);
+      iterCpt(month, day, year, codes);
     }
-    */
   });
 };
 
