@@ -11,7 +11,7 @@ iframe = document.getElementById("newBodyFrame");
 // eslint-disable-next-line no-undef
 fillLine = (month, day, year, cpt) => {
   let lineBase =
-    "componentListPanel:componentListView:31:component:claimLineForm:componentListPanel:componentListView:0:component:";
+    "componentListPanel:componentListView:30:component:claimLineForm:componentListPanel:componentListView:0:component:";
   let lineObjects = [
     {
       html: "fromToDateContainer:fromDate:month",
