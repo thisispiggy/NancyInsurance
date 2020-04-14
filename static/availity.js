@@ -85,8 +85,11 @@ fillDate = () => {
     // eslint-disable-next-line no-console
     console.log("filling each line now");
     fillLine(month, day, year, cpt);
+    console.log(cpt);
 
-    iframe.contentWindow.document.getElementById("saveServiceLine").click();
+    setTimeout(() => {
+      iframe.contentWindow.document.getElementById("saveServiceLine").click();
+    }, 2000);
 
     // let line = 0;
 
