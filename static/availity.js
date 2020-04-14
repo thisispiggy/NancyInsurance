@@ -99,12 +99,12 @@ fillDate = () => {
 
     // if first line and 99203 checked, filter out 99213, else filter out 99203
     if (line == 0 && filter99203[0].checked) {
-      let codes = cpt.filter(item => item.label != 99213);
+      const codes = cpt.filter(item => item.label != 99213);
       // eslint-disable-next-line no-console
       console.log(99203 + codes);
       iterCpt(month, day, year, codes);
     } else {
-      let codes = cpt.filter(item => item.label != 99203);
+      const codes = cpt.filter(item => item.label != 99203);
       // eslint-disable-next-line no-console
       console.log(99213 + codes);
       iterCpt(month, day, year, codes);
