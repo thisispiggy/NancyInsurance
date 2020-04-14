@@ -100,12 +100,9 @@ let fillLine = (month, day, year, cpt) => {
 
 //function to iterate each cpt code
 let iterCpt = (month, day, year, cpts) => {
-
-    cpts.forEach((cpt, index) => {
-      setTimeout(fillLine(month, day, year, cpt), 3000 * (index + 1))
-      
-    }),
-
+  cpts.forEach((cpt, index) => {
+    setTimeout(fillLine(month, day, year, cpt), 3000 * (index + 1));
+  });
 };
 
 //filters cpt code to only have list of 99203
