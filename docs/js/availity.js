@@ -1,9 +1,6 @@
 // // eslint-disable-next-line no-undef
 ({ website, dates, diagnosisCode, cpt } = BOOKMARK);
 
-// eslint-disable-next-line no-console
-// console.log(website, dates, diagnosisCode, cpt);
-
 // eslint-disable-next-line no-undef
 iframe = document.getElementById("newBodyFrame");
 
@@ -87,7 +84,7 @@ fillDate = () => {
     let [month, day, year] = date.split("/");
     // eslint-disable-next-line no-console
     console.log("filling each line now");
-    fillLine(month, day, year, BOOKMARK.cpt);
+    fillLine(month, day, year, cpt);
 
     // let line = 0;
 
