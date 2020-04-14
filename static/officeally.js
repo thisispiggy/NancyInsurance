@@ -1,127 +1,123 @@
-// // eslint-disable-next-line no-undef
-let { website, dates, diagnosisCode, cpt } = BOOKMARK;
-
-// eslint-disable-next-line no-undef
-let iframe = document.getElementById("newBodyFrame");
-
-//Function for filling line
-// eslint-disable-next-line no-undef
-let fillLine = (month, day, year, cpt) => {
+function fillLine(month, day, year, line, cptCode) {
   let lineBase =
-    "componentListPanel:componentListView:30:component:claimLineForm:componentListPanel:componentListView:0:component:";
+    "#ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_";
+
   let lineObjects = [
     {
-      html: "fromToDateContainer:fromDate:month",
+      html: lineBase + "FM_DATE_OF_SVC_MONTH" + line,
       data: month
     },
     {
-      html: "fromToDateContainer:fromDate:day",
+      html: lineBase + "FM_DATE_OF_SVC_DAY" + line,
       data: day
     },
     {
-      html: "fromToDateContainer:fromDate:year",
+      html: lineBase + "FM_DATE_OF_SVC_YEAR" + line,
       data: year
     },
     {
-      html: "fromToDateContainer:toDate:month",
+      html: lineBase + "TO_DATE_OF_SVC_MONTH" + line,
       data: month
     },
     {
-      html: "fromToDateContainer:toDate:day",
+      html: lineBase + "TO_DATE_OF_SVC_DAY" + line,
       data: day
     },
     {
-      html: "fromToDateContainer:toDate:year",
+      html: lineBase + "TO_DATE_OF_SVC_YEAR" + line,
       data: year
     },
     {
-      html: "servicePlaceContainer:servicePlace",
-      data: "11"
+      html: lineBase + "PLACE_OF_SVC" + line,
+      data: 11
     },
     {
-      html: "procedureCodeContainer:procedureCode",
-      data: cpt.label
+      html: lineBase + "CPT_CODE" + line,
+      data: cptCode.label
     },
     {
-      html: "modifier1Container:modifier1",
-      data: cpt.modifier
+      html: lineBase + "MODIFIER_A" + line,
+      data: cptCode.modifier
     },
     {
-      html: "chargesContainer:charges",
-      data: cpt.cost
+      html: lineBase + "DOS_DIAG_CODE" + line,
+      data: BOOKMARK.diagnosisCode
     },
     {
-      html: "numberContainer:number",
-      data: cpt.unit
+      html: lineBase + "DOS_CHRG" + line,
+      data: cptCode.cost
+    },
+    {
+      html: lineBase + "UNITS" + line,
+      data: cptCode.unit
     }
   ];
-
-  let lineDiagnosis = [
-    {
-      html: "diagnosisCodePointer1Container:diagnosisCodePointer1",
-      data: "1"
-    },
-    {
-      html: "diagnosisCodePointer1Container:diagnosisCodePointer2",
-      data: "2"
-    },
-    {
-      html: "diagnosisCodePointer1Container:diagnosisCodePointer3",
-      data: "3"
-    },
-    {
-      html: "diagnosisCodePointer1Container:diagnosisCodePointer4",
-      data: "3"
-    }
-  ];
-
-  //fill everything besides diagnosis code
+  let iframe = document.getElementById("Iframe9");
   lineObjects.forEach(object => {
-    object.html = lineBase + object.html;
-
-    iframe.contentWindow.document.getElementsByName(object.html)[0].value =
+    // eslint-disable-next-line no-console
+    console.log(object);
+    iframe.contentWindow.document.querySelector(object.html).value =
       object.data;
   });
+  // Object.keys(lineObjects).forEach(item => {
+  //   iframe.contentWindow.document.querySelector(item).value = lineObjects[item];
+  // });
+}
 
-  //fill the diagnosis code
-  lineDiagnosis.forEach(object => {
-    object.html = lineBase + object.html;
+BOOKMARK.fillDate = () => {
+  // inputDates = BOOKMARK.dates.split("\n");
+  inputDates = BOOKMARK.dates;
+  const cptCodes = BOOKMARK.cpt.filter(item => item.checked == true);
+  const rowNumbers = inputDates.length + cptCodes.length + 1;
+  for (let i; i < rowNumbers; i++) {
+    HCFALineItemTableManager.AddRows();
+  }
 
-    iframe.contentWindow.document.getElementsByName(
-      object.html
-    )[0].selectedIndex = object.data;
-  });
-};
+  const letters = {
+    1: "A",
+    2: "AB",
+    3: "ABC",
+    4: "ABCD",
+    5: "ABCDE",
+    6: "ABCDEF"
+  };
 
-//function to iterate each cpt code
-let iterCpt = (month, day, year, cpts) => {
-  cpts.forEach(cpt => {
-    fillLine(month, day, year, cpt);
-  });
-  //clicks save serve line
-  setTimeout(() => {
-    iframe.contentWindow.document.getElementById("saveServiceLine").click();
-  }, 2000);
-};
+  BOOKMARK.diagnosisCode = letters[BOOKMARK.diagnosisCode];
+  // eslint-disable-next-line no-console
+  console.log("dates:" + inputDates);
+  // eslint-disable-next-line no-console
+  console.log("all codes:" + cptCodes);
 
-//filters cpt code to only have list of 99203
-let filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
-
-//Function to iterate each date
-let fillDate = () => {
   let line = 0;
-  BOOKMARK.dates.forEach(date => {
-    let [month, day, year] = date.split("/");
-    let cptChecked = cpt.filter(item => item.checked == true);
-    // fillLine(month, day, year, cpt[0]);
+  inputDates.forEach(date => {
+    let month, day, year;
+    [month, day, year] = date.split("/");
 
-    //if first line and 99203 checked, filter out 99213, else filter out 99203
-    if (line == 0 && filter99203[0].checked) {
-      let codes = cptChecked.filter(item => item.label != 99213);
-      iterCpt(month, day, year, codes);
+    if (line == 0) {
+      let codes = cptCodes.filter(cptCode => {
+        return cptCode.label != 99213;
+      });
+      codes.forEach(cptCode => {
+        // eslint-disable-next-line no-console
+        // console.log("99203" + cptCode);
+        fillLine(month, day, year, line, cptCode);
+        line++;
+        // eslint-disable-next-line no-console
+        console.log(line);
+      });
     } else {
-      let codes = cptChecked.filter(item => item.label != 99203);
-      iterCpt(month, day, year, codes);
+      let codes = cptCodes.filter(cptCode => {
+        return cptCode.label != 99203;
+      });
+
+      codes.forEach(cptCode => {
+        // eslint-disable-next-line no-console
+        console.log("99213" + cptCode);
+        fillLine(month, day, year, line, cptCode);
+        line++;
+        // eslint-disable-next-line no-console
+        console.log(line);
+      });
     }
   });
 };
@@ -131,11 +127,11 @@ if (BOOKMARK) {
   s.type = "text/javascript";
   //   let code = BOOKMARK.fillDate;
   try {
-    s.appendChild(document.createTextNode(fillDate));
+    s.appendChild(document.createTextNode(BOOKMARK.fillDate));
     document.body.appendChild(s);
-    fillDate();
+    BOOKMARK.fillDate();
   } catch (e) {
-    s.text = fillDate;
+    s.text = BOOKMARK.fillDate;
     document.body.appendChild(s);
   }
 }

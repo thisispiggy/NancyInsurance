@@ -2,11 +2,11 @@
 let { website, dates, diagnosisCode, cpt } = BOOKMARK;
 
 // eslint-disable-next-line no-undef
-iframe = document.getElementById("newBodyFrame");
+let iframe = document.getElementById("newBodyFrame");
 
 //Function for filling line
 // eslint-disable-next-line no-undef
-fillLine = function(month, day, year, cpt) {
+let fillLine = (month, day, year, cpt) => {
   let lineBase =
     "componentListPanel:componentListView:30:component:claimLineForm:componentListPanel:componentListView:0:component:";
   let lineObjects = [
@@ -91,22 +91,21 @@ fillLine = function(month, day, year, cpt) {
       object.html
     )[0].selectedIndex = object.data;
   });
+};
 
+//function to iterate each cpt code
+let iterCpt = (month, day, year, cpts) => {
+  cpts.forEach(cpt => {
+    fillLine(month, day, year, cpt);
+  });
   //clicks save serve line
   setTimeout(() => {
     iframe.contentWindow.document.getElementById("saveServiceLine").click();
   }, 2000);
 };
 
-//function to iterate each cpt code
-iterCpt = function(month, day, year, cpts) {
-  cpts.forEach(cpt => {
-    fillLine(month, day, year, cpt);
-  });
-};
-
 //filters cpt code to only have list of 99203
-filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
+let filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
 
 //Function to iterate each date
 let fillDate = () => {
