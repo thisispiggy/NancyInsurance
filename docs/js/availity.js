@@ -4,7 +4,7 @@ let { website, dates, diagnosisCode, cpt } = BOOKMARK;
 // eslint-disable-next-line no-undef
 iframe = document.getElementById("newBodyFrame");
 
-//Function for filling each line for each date
+//Function for filling line 
 // eslint-disable-next-line no-undef
 fillLine = (month, day, year, cpt) => {
   let lineBase =
@@ -101,8 +101,6 @@ fillLine = (month, day, year, cpt) => {
 //function to iterate each cpt code
 iterCpt = function(month, day, year, cpts) {
   cpts.forEach(cpt => {
-    // eslint-disable-next-line no-console
-    console.log(cpt);
     fillLine(month, day, year, cpt);
   });
 };
@@ -110,22 +108,22 @@ iterCpt = function(month, day, year, cpts) {
 //filters cpt code to only have list of 99203
 filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
 
-//Function for each date
+//Function to iterate each date
 fillDate = () => {
   let line = 0;
   BOOKMARK.dates.forEach(date => {
     let [month, day, year] = date.split("/");
 
-    fillLine(month, day, year, cpt[0]);
+    // fillLine(month, day, year, cpt[0]);
 
-    // if first line and 99203 checked, filter out 99213, else filter out 99203
-    // if (line == 0 && filter99203[0].checked) {
-    //   let codes = cpt.filter(item => item.label != 99213);
-    //   iterCpt(month, day, year, codes);
-    // } else {
-    //   let codes = cpt.filter(item => item.label != 99203);
-    //   iterCpt(month, day, year, codes);
-    // }
+    if first line and 99203 checked, filter out 99213, else filter out 99203
+    if (line == 0 && filter99203[0].checked) {
+      let codes = cpt.filter(item => item.label != 99213);
+      iterCpt(month, day, year, codes);
+    } else {
+      let codes = cpt.filter(item => item.label != 99203);
+      iterCpt(month, day, year, codes);
+    }
   });
 };
 
