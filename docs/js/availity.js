@@ -4,7 +4,7 @@ let { website, dates, diagnosisCode, cpt } = BOOKMARK;
 // eslint-disable-next-line no-undef
 iframe = document.getElementById("newBodyFrame");
 
-//Function for filling line 
+//Function for filling line
 // eslint-disable-next-line no-undef
 fillLine = (month, day, year, cpt) => {
   let lineBase =
@@ -116,7 +116,7 @@ fillDate = () => {
 
     // fillLine(month, day, year, cpt[0]);
 
-    if first line and 99203 checked, filter out 99213, else filter out 99203
+    //if first line and 99203 checked, filter out 99213, else filter out 99203
     if (line == 0 && filter99203[0].checked) {
       let codes = cpt.filter(item => item.label != 99213);
       iterCpt(month, day, year, codes);
