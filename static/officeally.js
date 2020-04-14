@@ -1,123 +1,127 @@
-function fillLine(month, day, year, line, cptCode) {
-  let lineBase =
-    "#ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_";
+// // eslint-disable-next-line no-undef
+let { website, dates, diagnosisCode, cpt } = BOOKMARK;
 
+// eslint-disable-next-line no-undef
+let iframe = document.getElementById("newBodyFrame");
+
+//Function for filling line
+// eslint-disable-next-line no-undef
+let fillLine = (month, day, year, cpt) => {
+  let lineBase =
+    "componentListPanel:componentListView:30:component:claimLineForm:componentListPanel:componentListView:0:component:";
   let lineObjects = [
     {
-      html: lineBase + "FM_DATE_OF_SVC_MONTH" + line,
-      data: month,
+      html: "fromToDateContainer:fromDate:month",
+      data: month
     },
     {
-      html: lineBase + "FM_DATE_OF_SVC_DAY" + line,
-      data: day,
+      html: "fromToDateContainer:fromDate:day",
+      data: day
     },
     {
-      html: lineBase + "FM_DATE_OF_SVC_YEAR" + line,
-      data: year,
+      html: "fromToDateContainer:fromDate:year",
+      data: year
     },
     {
-      html: lineBase + "TO_DATE_OF_SVC_MONTH" + line,
-      data: month,
+      html: "fromToDateContainer:toDate:month",
+      data: month
     },
     {
-      html: lineBase + "TO_DATE_OF_SVC_DAY" + line,
-      data: day,
+      html: "fromToDateContainer:toDate:day",
+      data: day
     },
     {
-      html: lineBase + "TO_DATE_OF_SVC_YEAR" + line,
-      data: year,
+      html: "fromToDateContainer:toDate:year",
+      data: year
     },
     {
-      html: lineBase + "PLACE_OF_SVC" + line,
-      data: 11,
+      html: "servicePlaceContainer:servicePlace",
+      data: "11"
     },
     {
-      html: lineBase + "CPT_CODE" + line,
-      data: cptCode.label,
+      html: "procedureCodeContainer:procedureCode",
+      data: cpt.label
     },
     {
-      html: lineBase + "MODIFIER_A" + line,
-      data: cptCode.modifier,
+      html: "modifier1Container:modifier1",
+      data: cpt.modifier
     },
     {
-      html: lineBase + "DOS_DIAG_CODE" + line,
-      data: BOOKMARK.diagnosisCode,
+      html: "chargesContainer:charges",
+      data: cpt.cost
     },
     {
-      html: lineBase + "DOS_CHRG" + line,
-      data: cptCode.cost,
-    },
-    {
-      html: lineBase + "UNITS" + line,
-      data: cptCode.unit,
-    },
+      html: "numberContainer:number",
+      data: cpt.unit
+    }
   ];
-  let iframe = document.getElementById("Iframe9");
-  lineObjects.forEach((object) => {
-    // eslint-disable-next-line no-console
-    console.log(object);
-    iframe.contentWindow.document.querySelector(object.html).value =
+
+  let lineDiagnosis = [
+    {
+      html: "diagnosisCodePointer1Container:diagnosisCodePointer1",
+      data: "1"
+    },
+    {
+      html: "diagnosisCodePointer1Container:diagnosisCodePointer2",
+      data: "2"
+    },
+    {
+      html: "diagnosisCodePointer1Container:diagnosisCodePointer3",
+      data: "3"
+    },
+    {
+      html: "diagnosisCodePointer1Container:diagnosisCodePointer4",
+      data: "3"
+    }
+  ];
+
+  //fill everything besides diagnosis code
+  lineObjects.forEach(object => {
+    object.html = lineBase + object.html;
+
+    iframe.contentWindow.document.getElementsByName(object.html)[0].value =
       object.data;
   });
-  // Object.keys(lineObjects).forEach(item => {
-  //   iframe.contentWindow.document.querySelector(item).value = lineObjects[item];
-  // });
-}
 
-BOOKMARK.fillDate = () => {
-  // inputDates = BOOKMARK.dates.split("\n");
-  inputDates = BOOKMARK.dates;
-  const cptCodes = BOOKMARK.cpt.filter((item) => item.checked == true);
-  const rowNumbers = inputDates.length + cptCodes.length + 1;
-  for (let i; i < rowNumbers; i++) {
-    HCFALineItemTableManager.AddRows();
-  }
+  //fill the diagnosis code
+  lineDiagnosis.forEach(object => {
+    object.html = lineBase + object.html;
 
-  const letters = {
-    1: "A",
-    2: "AB",
-    3: "ABC",
-    4: "ABCD",
-    5: "ABCDE",
-    6: "ABCDEF",
-  };
+    iframe.contentWindow.document.getElementsByName(
+      object.html
+    )[0].selectedIndex = object.data;
+  });
+};
 
-  BOOKMARK.diagnosisCode = letters[BOOKMARK.diagnosisCode];
-  // eslint-disable-next-line no-console
-  console.log("dates:" + inputDates);
-  // eslint-disable-next-line no-console
-  console.log("all codes:" + cptCodes);
+//function to iterate each cpt code
+let iterCpt = (month, day, year, cpts) => {
+  cpts.forEach(cpt => {
+    fillLine(month, day, year, cpt);
+  });
+  //clicks save serve line
+  setTimeout(() => {
+    iframe.contentWindow.document.getElementById("saveServiceLine").click();
+  }, 2000);
+};
 
+//filters cpt code to only have list of 99203
+let filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
+
+//Function to iterate each date
+let fillDate = () => {
   let line = 0;
-  inputDates.forEach((date) => {
-    let month, day, year;
-    [month, day, year] = date.split("/");
+  BOOKMARK.dates.forEach(date => {
+    let [month, day, year] = date.split("/");
+    let cptChecked = cpt.filter(item => item.checked == true);
+    // fillLine(month, day, year, cpt[0]);
 
-    if (line == 0) {
-      let codes = cptCodes.filter((cptCode) => {
-        return cptCode.label != 99213;
-      });
-      codes.forEach((cptCode) => {
-        // eslint-disable-next-line no-console
-        // console.log("99203" + cptCode);
-        fillLine(month, day, year, line, cptCode);
-        line++;
-        // eslint-disable-next-line no-console
-        console.log(line);
-      });
+    //if first line and 99203 checked, filter out 99213, else filter out 99203
+    if (line == 0 && filter99203[0].checked) {
+      let codes = cptChecked.filter(item => item.label != 99213);
+      iterCpt(month, day, year, codes);
     } else {
-      let codes = cptCodes.filter((cptCode) => {
-        return cptCode.label != 99203;
-      });
-
-      codes.forEach((cptCode) => {
-        // eslint-disable-next-line no-console
-        console.log("99213" + cptCode);
-        fillLine(month, day, year, line, cptCode);
-        line++;
-        // eslint-disable-next-line no-console
-        console.log(line);
-      });
+      let codes = cptChecked.filter(item => item.label != 99203);
+      iterCpt(month, day, year, codes);
     }
   });
 };
@@ -127,11 +131,11 @@ if (BOOKMARK) {
   s.type = "text/javascript";
   //   let code = BOOKMARK.fillDate;
   try {
-    s.appendChild(document.createTextNode(BOOKMARK.fillDate));
+    s.appendChild(document.createTextNode(fillDate));
     document.body.appendChild(s);
-    BOOKMARK.fillDate();
+    fillDate();
   } catch (e) {
-    s.text = BOOKMARK.fillDate;
+    s.text = fillDate;
     document.body.appendChild(s);
   }
 }
