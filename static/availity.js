@@ -82,8 +82,10 @@ fillLine = (month, day, year, cpt) => {
 };
 
 //function to iterate each cpt code
-iterCpt = (month, day, year, cpts) => {
+iterCpt = function(month, day, year, cpts) {
   cpts.forEach(cpt => {
+    // eslint-disable-next-line no-console
+    console.log(cpt);
     fillLine(month, day, year, cpt);
   });
 };
@@ -99,14 +101,10 @@ fillDate = () => {
 
     // if first line and 99203 checked, filter out 99213, else filter out 99203
     if (line == 0 && filter99203[0].checked) {
-      const codes = cpt.filter(item => item.label != 99213);
-      // eslint-disable-next-line no-console
-      console.log(99203 + codes);
+      let codes = cpt.filter(item => item.label != 99213);
       iterCpt(month, day, year, codes);
     } else {
-      const codes = cpt.filter(item => item.label != 99203);
-      // eslint-disable-next-line no-console
-      console.log(99213 + codes);
+      let codes = cpt.filter(item => item.label != 99203);
       iterCpt(month, day, year, codes);
     }
   });
