@@ -62,18 +62,18 @@ fillLine = (month, day, year, cpt) => {
     iframe.contentWindow.document.getElementsByName(object.html)[0].value =
       object.data;
 
-    document.getElementById(
-      lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer1"
-    ).selectedIndex = "1";
-    document.getElementById(
-      lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer2"
-    ).selectedIndex = "2";
-    document.getElementById(
-      lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer3"
-    ).selectedIndex = "3";
-    document.getElementById(
-      lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer4"
-    ).selectedIndex = "4";
+    // document.getElementById(
+    //   lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer1"
+    // ).selectedIndex = "1";
+    // document.getElementById(
+    //   lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer2"
+    // ).selectedIndex = "2";
+    // document.getElementById(
+    //   lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer3"
+    // ).selectedIndex = "3";
+    // document.getElementById(
+    //   lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer4"
+    // ).selectedIndex = "4";
 
     setTimeout(() => {
       iframe.contentWindow.document.getElementById("saveServiceLine").click();
