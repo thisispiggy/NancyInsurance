@@ -91,17 +91,21 @@ let fillLine = (month, day, year, cpt) => {
       object.html
     )[0].selectedIndex = object.data;
   });
-};
 
-//function to iterate each cpt code
-let iterCpt = (month, day, year, cpts) => {
-  cpts.forEach(cpt => {
-    fillLine(month, day, year, cpt);
-  });
   //clicks save serve line
   setTimeout(() => {
     iframe.contentWindow.document.getElementById("saveServiceLine").click();
   }, 2000);
+};
+
+//function to iterate each cpt code
+let iterCpt = (month, day, year, cpts) => {
+  setTimeout(
+    cpts.forEach(cpt => {
+      fillLine(month, day, year, cpt);
+    }),
+    3000
+  );
 };
 
 //filters cpt code to only have list of 99203
