@@ -6,7 +6,7 @@ iframe = document.getElementById("newBodyFrame");
 
 //Function for filling line
 // eslint-disable-next-line no-undef
-fillLine = (month, day, year, cpt) => {
+fillLine = function(month, day, year, cpt) {
   let lineBase =
     "componentListPanel:componentListView:30:component:claimLineForm:componentListPanel:componentListView:0:component:";
   let lineObjects = [
@@ -109,7 +109,7 @@ iterCpt = function(month, day, year, cpts) {
 filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
 
 //Function to iterate each date
-fillDate = () => {
+let fillDate = () => {
   let line = 0;
   BOOKMARK.dates.forEach(date => {
     let [month, day, year] = date.split("/");
