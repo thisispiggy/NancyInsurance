@@ -86,6 +86,8 @@ fillDate = () => {
     console.log("filling each line now");
     fillLine(month, day, year, cpt);
 
+    iframe.contentWindow.document.getElementById("saveServiceLine").click();
+
     // let line = 0;
 
     // if first line and 99203 checked, filter out 99213, else filter out 99203
