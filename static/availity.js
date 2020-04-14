@@ -1,8 +1,11 @@
 // // eslint-disable-next-line no-undef
 ({ website, dates, diagnosisCode, cpt } = BOOKMARK);
 
+// eslint-disable-next-line no-console
+console.log(website, dates, diagnosisCode, cpt);
+
 // eslint-disable-next-line no-undef
-const iframe = document.getElementById("newBodyFrame");
+iframe = document.getElementById("newBodyFrame");
 
 //Function for filling each line for each date
 // eslint-disable-next-line no-undef
