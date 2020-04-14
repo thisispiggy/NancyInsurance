@@ -79,7 +79,7 @@ iterCpt = (month, day, year, cpts) => {
 };
 
 //filters cpt code to only have list of 99203
-const filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
+filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
 
 //Function for each date
 fillDate = () => {
