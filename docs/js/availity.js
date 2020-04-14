@@ -1,5 +1,5 @@
 // // eslint-disable-next-line no-undef
-({ website, dates, diagnosisCode, cpt } = BOOKMARK);
+// ({ website, dates, diagnosisCode, cpt } = BOOKMARK);
 
 // eslint-disable-next-line no-console
 console.log(website, dates, diagnosisCode, cpt);
