@@ -9,7 +9,7 @@ iframe = document.getElementById("newBodyFrame");
 
 //Function for filling each line for each date
 // eslint-disable-next-line no-undef
-const fillLine = (month, day, year, cpt) => {
+fillLine = (month, day, year, cpt) => {
   const lineBase =
     "componentListPanel:componentListView:31:component:claimLineForm:componentListPanel:componentListView:0:component:";
   const lineObjects = [
@@ -72,7 +72,7 @@ const fillLine = (month, day, year, cpt) => {
 };
 
 //function to iterate each cpt code
-const iterCpt = (month, day, year, cpts) => {
+iterCpt = (month, day, year, cpts) => {
   cpts.forEach(cpt => {
     fillLine(month, day, year, cpt);
   });
@@ -82,7 +82,7 @@ const iterCpt = (month, day, year, cpts) => {
 const filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
 
 //Function for each date
-const fillDate = () => {
+fillDate = () => {
   BOOKMARK.dates.forEach(date => {
     let [month, day, year] = date.split("/");
     // eslint-disable-next-line no-console
