@@ -99,14 +99,16 @@ fillDate = () => {
   BOOKMARK.dates.forEach(date => {
     let [month, day, year] = date.split("/");
 
+    fillLine(month, day, year, cpt[0]);
+
     // if first line and 99203 checked, filter out 99213, else filter out 99203
-    if (line == 0 && filter99203[0].checked) {
-      let codes = cpt.filter(item => item.label != 99213);
-      iterCpt(month, day, year, codes);
-    } else {
-      let codes = cpt.filter(item => item.label != 99203);
-      iterCpt(month, day, year, codes);
-    }
+    // if (line == 0 && filter99203[0].checked) {
+    //   let codes = cpt.filter(item => item.label != 99213);
+    //   iterCpt(month, day, year, codes);
+    // } else {
+    //   let codes = cpt.filter(item => item.label != 99203);
+    //   iterCpt(month, day, year, codes);
+    // }
   });
 };
 
