@@ -1,8 +1,8 @@
 // // eslint-disable-next-line no-undef
-// ({ website, dates, diagnosisCode, cpt } = BOOKMARK);
+({ website, dates, diagnosisCode, cpt } = BOOKMARK);
 
 // eslint-disable-next-line no-console
-console.log(website, dates, diagnosisCode, cpt);
+// console.log(website, dates, diagnosisCode, cpt);
 
 // eslint-disable-next-line no-undef
 iframe = document.getElementById("newBodyFrame");
@@ -10,9 +10,9 @@ iframe = document.getElementById("newBodyFrame");
 //Function for filling each line for each date
 // eslint-disable-next-line no-undef
 fillLine = (month, day, year, cpt) => {
-  const lineBase =
+  let lineBase =
     "componentListPanel:componentListView:31:component:claimLineForm:componentListPanel:componentListView:0:component:";
-  const lineObjects = [
+  let lineObjects = [
     {
       html: "fromToDateContainer:fromDate:month",
       data: month
