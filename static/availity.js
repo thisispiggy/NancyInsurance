@@ -1,5 +1,5 @@
 // // eslint-disable-next-line no-undef
-({ website, dates, diagnosisCode, cpt } = BOOKMARK);
+let { website, dates, diagnosisCode, cpt } = BOOKMARK;
 
 // eslint-disable-next-line no-undef
 iframe = document.getElementById("newBodyFrame");
