@@ -1,5 +1,5 @@
 // // eslint-disable-next-line no-undef
-const { website, dates, diagnosisCode, cpt } = BOOKMARK;
+({ website, dates, diagnosisCode, cpt } = BOOKMARK;)
 
 // eslint-disable-next-line no-undef
 const iframe = document.getElementById("newBodyFrame");
@@ -83,7 +83,7 @@ const fillDate = () => {
   BOOKMARK.dates.forEach(date => {
     let [month, day, year] = date.split("/");
     // eslint-disable-next-line no-console
-    console.log(BOOKMARK.cpt);
+    console.log("filling each line now");
     fillLine(month, day, year, BOOKMARK.cpt);
 
     // let line = 0;
