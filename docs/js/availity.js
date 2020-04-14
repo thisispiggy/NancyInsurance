@@ -56,29 +56,46 @@ fillLine = (month, day, year, cpt) => {
     }
   ];
 
+  let lineDiagnosis = [
+    {
+      html: "diagnosisCodePointer1Container:diagnosisCodePointer1",
+      data: "1"
+    },
+    {
+      html: "diagnosisCodePointer1Container:diagnosisCodePointer2",
+      data: "2"
+    },
+    {
+      html: "diagnosisCodePointer1Container:diagnosisCodePointer3",
+      data: "3"
+    },
+    {
+      html: "diagnosisCodePointer1Container:diagnosisCodePointer4",
+      data: "3"
+    }
+  ];
+
+  //fill everything besides diagnosis code
   lineObjects.forEach(object => {
     object.html = lineBase + object.html;
 
     iframe.contentWindow.document.getElementsByName(object.html)[0].value =
       object.data;
-
-    // document.getElementById(
-    //   lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer1"
-    // ).selectedIndex = "1";
-    // document.getElementById(
-    //   lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer2"
-    // ).selectedIndex = "2";
-    // document.getElementById(
-    //   lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer3"
-    // ).selectedIndex = "3";
-    // document.getElementById(
-    //   lineBase + "diagnosisCodePointer1Container:diagnosisCodePointer4"
-    // ).selectedIndex = "4";
-
-    setTimeout(() => {
-      iframe.contentWindow.document.getElementById("saveServiceLine").click();
-    }, 2000);
   });
+
+  //fill the diagnosis code
+  lineDiagnosis.forEach(object => {
+    object.html = lineBase + object.html;
+
+    iframe.contentWindow.document.getElementsByName(
+      object.html
+    )[0].selectedIndex = object.data;
+  });
+
+  //clicks save serve line
+  setTimeout(() => {
+    iframe.contentWindow.document.getElementById("saveServiceLine").click();
+  }, 2000);
 };
 
 //function to iterate each cpt code
