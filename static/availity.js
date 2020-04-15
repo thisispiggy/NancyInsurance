@@ -95,20 +95,18 @@ let fillLine = (month, day, year, cpt) => {
     )[0].selectedIndex = object.data;
   });
 
-  console.log(lineObjects);
-
   //clicks save serve line
   setTimeout(() => {
     iframe.contentWindow.document.getElementById("saveServiceLine").click();
   }, 2000);
 
-  return new Promise((resolve) => setTimeout(resolve("Filled page"), 4000));
+  return new Promise((resolve) => setTimeout(resolve("Filled page"), 3000));
 };
 
 //function to iterate each cpt code
 let iterCpt = async (month, day, year, cpts) => {
   for (let j = 0; j < cpts.length; j++) {
-    await fillLine(month, day, year, cpts[j]);
+    await setTimeout(fillLine(month, day, year, cpts[j]), 4000);
   }
   return new Promise((resolve) => {
     resolve("Finished cpt");
