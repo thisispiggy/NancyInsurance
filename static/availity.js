@@ -12,71 +12,71 @@ let fillLine = (month, day, year, cpt) => {
   let lineObjects = [
     {
       html: "fromToDateContainer:fromDate:month",
-      data: month
+      data: month,
     },
     {
       html: "fromToDateContainer:fromDate:day",
-      data: day
+      data: day,
     },
     {
       html: "fromToDateContainer:fromDate:year",
-      data: year
+      data: year,
     },
     {
       html: "fromToDateContainer:toDate:month",
-      data: month
+      data: month,
     },
     {
       html: "fromToDateContainer:toDate:day",
-      data: day
+      data: day,
     },
     {
       html: "fromToDateContainer:toDate:year",
-      data: year
+      data: year,
     },
     {
       html: "servicePlaceContainer:servicePlace",
-      data: "11"
+      data: "11",
     },
     {
       html: "procedureCodeContainer:procedureCode",
-      data: cpt.label
+      data: cpt.label,
     },
     {
       html: "modifier1Container:modifier1",
-      data: cpt.modifier
+      data: cpt.modifier,
     },
     {
       html: "chargesContainer:charges",
-      data: cpt.cost
+      data: cpt.cost,
     },
     {
       html: "numberContainer:number",
-      data: cpt.unit
-    }
+      data: cpt.unit,
+    },
   ];
 
   let lineDiagnosis = [
     {
       html: "diagnosisCodePointer1Container:diagnosisCodePointer1",
-      data: "1"
+      data: "1",
     },
     {
       html: "diagnosisCodePointer1Container:diagnosisCodePointer2",
-      data: "2"
+      data: "2",
     },
     {
       html: "diagnosisCodePointer1Container:diagnosisCodePointer3",
-      data: "3"
+      data: "3",
     },
     {
       html: "diagnosisCodePointer1Container:diagnosisCodePointer4",
-      data: "3"
-    }
+      data: "3",
+    },
   ];
 
   //fill everything besides diagnosis code
-  lineObjects.forEach(object => {
+  lineObjects.forEach((object) => {
     object.html = lineBase + object.html;
 
     iframe.contentWindow.document.getElementsByName(object.html)[0].value =
@@ -84,7 +84,7 @@ let fillLine = (month, day, year, cpt) => {
   });
 
   //fill the diagnosis code
-  lineDiagnosis.forEach(object => {
+  lineDiagnosis.forEach((object) => {
     object.html = lineBase + object.html;
 
     iframe.contentWindow.document.getElementsByName(
@@ -100,15 +100,38 @@ let fillLine = (month, day, year, cpt) => {
 
 //function to iterate each cpt code
 let iterCpt = (month, day, year, cpts) => {
+  for (i = 0; i < cpts.length; i++) {
+    setTimeout(fillLine(month, day, year, cpt), 4000 * i);
+  }
+};
+
+/*
+let iterCpt = (month, day, year, cpts) => {
   cpts.forEach((cpt, index) => {
     setTimeout(fillLine(month, day, year, cpt), 3000 * (index + 1));
   });
 };
+*/
 
 //filters cpt code to only have list of 99203
-let filter99203 = BOOKMARK.cpt.filter(cpt => cpt.label == 99203);
+let filter99203 = BOOKMARK.cpt.filter((cpt) => cpt.label == 99203);
 
 //Function to iterate each date
+let fillDate = () => {
+  for (i = 0; i < BOOKMARK.dates.length; i++) {
+    let [month, day, year] = date.split("/");
+    let cptChecked = cpt.filter((item) => item.checked == true);
+    if (i == 0 && filter99203[0].checked) {
+      let codes = cptChecked.filter((item) => item.label != 99213);
+      iterCpt(month, day, year, codes);
+    } else {
+      let codes = cptChecked.filter((item) => item.label != 99203);
+      iterCpt(month, day, year, codes);
+    }
+  }
+};
+
+/*
 let fillDate = () => {
   let line = 0;
   BOOKMARK.dates.forEach(date => {
@@ -126,6 +149,8 @@ let fillDate = () => {
     }
   });
 };
+
+*/
 
 if (BOOKMARK) {
   let s = document.createElement("script");
