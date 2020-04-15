@@ -8,8 +8,14 @@ let { website, dates, diagnosisCode, cpt } = BOOKMARK;
 let filter99203 = cpt.filter((cpt) => cpt.label == 99203);
 let cptChecked = cpt.filter((item) => item.checked == true);
 
+let sleep = (time) => {
+  return Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+};
+
 //function to fill the page
-let fillLine = (month, day, year, cpt) => {
+let fillLine = async (month, day, year, cpt) => {
   let lineBase =
     "componentListPanel:componentListView:30:component:claimLineForm:componentListPanel:componentListView:0:component:";
   let lineObjects = [
@@ -100,13 +106,13 @@ let fillLine = (month, day, year, cpt) => {
     iframe.contentWindow.document.getElementById("saveServiceLine").click();
   }, 2000);
 
-  return new Promise((resolve) => setTimeout(resolve("Filled page"), 3000));
+  await sleep(4000);
 };
 
 //function to iterate each cpt code
 let iterCpt = async (month, day, year, cpts) => {
   for (let j = 0; j < cpts.length; j++) {
-    await setTimeout(fillLine(month, day, year, cpts[j]), 4000);
+    await fillLine(month, day, year, cpts[j]);
   }
   return new Promise((resolve) => {
     resolve("Finished cpt");
