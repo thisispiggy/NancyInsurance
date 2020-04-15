@@ -101,12 +101,14 @@ let fillLine = async (month, day, year, cpt) => {
     )[0].selectedIndex = object.data;
   });
 
-  //clicks save serve line
-  setTimeout(() => {
-    iframe.contentWindow.document.getElementById("saveServiceLine").click();
-  }, 2000);
+  await sleep(1000);
 
-  await sleep(4000);
+  //clicks save serve line
+  // setTimeout(() => {
+  //   iframe.contentWindow.document.getElementById("saveServiceLine").click();
+  // }, 1000);
+
+  iframe.contentWindow.document.getElementById("saveServiceLine").click();
 };
 
 //function to iterate each cpt code
@@ -148,32 +150,3 @@ if (BOOKMARK) {
     document.body.appendChild(s);
   }
 }
-
-/*
-let fillDate = () => {
-  let line = 0;
-  BOOKMARK.dates.forEach(date => {
-    let [month, day, year] = date.split("/");
-    let cptChecked = cpt.filter(item => item.checked == true);
-    // fillLine(month, day, year, cpt[0]);
-
-    //if first line and 99203 checked, filter out 99213, else filter out 99203
-    if (line == 0 && filter99203[0].checked) {
-      let codes = cptChecked.filter(item => item.label != 99213);
-      iterCpt(month, day, year, codes);
-    } else {
-      let codes = cptChecked.filter(item => item.label != 99203);
-      iterCpt(month, day, year, codes);
-    }
-  });
-};
-
-*/
-
-/*
-let iterCpt = (month, day, year, cpts) => {
-  cpts.forEach((cpt, index) => {
-    setTimeout(fillLine(month, day, year, cpt), 3000 * (index + 1));
-  });
-};
-*/
