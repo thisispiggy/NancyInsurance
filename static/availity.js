@@ -9,7 +9,7 @@ let filter99203 = cpt.filter((cpt) => cpt.label == 99203);
 let cptChecked = cpt.filter((item) => item.checked == true);
 
 let sleep = (time) => {
-  return Promise((resolve) => {
+  return new Promise((resolve) => {
     setTimeout(resolve, time);
   });
 };
