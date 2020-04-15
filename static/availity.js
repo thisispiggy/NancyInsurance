@@ -1,11 +1,14 @@
-// // eslint-disable-next-line no-undef
-let { website, dates, diagnosisCode, cpt } = BOOKMARK;
-
+/* eslint-disable no-console */
+// targets page's iframe
 // eslint-disable-next-line no-undef
 let iframe = document.getElementById("newBodyFrame");
+// eslint-disable-next-line no-unused-vars
+let { website, dates, diagnosisCode, cpt } = BOOKMARK;
+// filters cpt code to only have list of 99203 and checked cpt
+let filter99203 = cpt.filter((cpt) => cpt.label == 99203);
+let cptChecked = cpt.filter((item) => item.checked == true);
 
-//Function for filling line
-// eslint-disable-next-line no-undef
+//function to fill the page
 let fillLine = (month, day, year, cpt) => {
   let lineBase =
     "componentListPanel:componentListView:30:component:claimLineForm:componentListPanel:componentListView:0:component:";
@@ -92,7 +95,6 @@ let fillLine = (month, day, year, cpt) => {
     )[0].selectedIndex = object.data;
   });
 
-  // eslint-disable-next-line no-console
   console.log(lineObjects);
 
   //clicks save serve line
@@ -103,27 +105,16 @@ let fillLine = (month, day, year, cpt) => {
 
 //function to iterate each cpt code
 let iterCpt = (month, day, year, cpts) => {
-  for (i = 0; i < cpts.length; i++) {
-    setTimeout(fillLine(month, day, year, cpt), 4000 * i);
+  for (let j = 0; j < cpts.length; j++) {
+    setTimeout(fillLine(month, day, year, cpts[j]), 4000 * j);
   }
 };
 
-/*
-let iterCpt = (month, day, year, cpts) => {
-  cpts.forEach((cpt, index) => {
-    setTimeout(fillLine(month, day, year, cpt), 3000 * (index + 1));
-  });
-};
-*/
-
-//filters cpt code to only have list of 99203
-let filter99203 = BOOKMARK.cpt.filter((cpt) => cpt.label == 99203);
-
 //Function to iterate each date
 let fillDate = () => {
-  for (i = 0; i < BOOKMARK.dates.length; i++) {
-    let [month, day, year] = date.split("/");
-    let cptChecked = cpt.filter((item) => item.checked == true);
+  for (let i = 0; i < dates.length; i++) {
+    let [month, day, year] = dates[i].split("/");
+
     if (i == 0 && filter99203[0].checked) {
       let codes = cptChecked.filter((item) => item.label != 99213);
       iterCpt(month, day, year, codes);
@@ -133,6 +124,19 @@ let fillDate = () => {
     }
   }
 };
+
+if (BOOKMARK) {
+  let s = document.createElement("script");
+  s.type = "text/javascript";
+  try {
+    s.appendChild(document.createTextNode(fillDate));
+    document.body.appendChild(s);
+    fillDate();
+  } catch (e) {
+    s.text = fillDate;
+    document.body.appendChild(s);
+  }
+}
 
 /*
 let fillDate = () => {
@@ -155,16 +159,10 @@ let fillDate = () => {
 
 */
 
-if (BOOKMARK) {
-  let s = document.createElement("script");
-  s.type = "text/javascript";
-  //   let code = BOOKMARK.fillDate;
-  try {
-    s.appendChild(document.createTextNode(fillDate));
-    document.body.appendChild(s);
-    fillDate();
-  } catch (e) {
-    s.text = fillDate;
-    document.body.appendChild(s);
-  }
-}
+/*
+let iterCpt = (month, day, year, cpts) => {
+  cpts.forEach((cpt, index) => {
+    setTimeout(fillLine(month, day, year, cpt), 3000 * (index + 1));
+  });
+};
+*/
