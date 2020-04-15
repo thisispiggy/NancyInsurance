@@ -92,6 +92,9 @@ let fillLine = (month, day, year, cpt) => {
     )[0].selectedIndex = object.data;
   });
 
+  // eslint-disable-next-line no-console
+  console.log(lineObjects);
+
   //clicks save serve line
   setTimeout(() => {
     iframe.contentWindow.document.getElementById("saveServiceLine").click();
