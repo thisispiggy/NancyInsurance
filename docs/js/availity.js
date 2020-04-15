@@ -101,26 +101,32 @@ let fillLine = (month, day, year, cpt) => {
   setTimeout(() => {
     iframe.contentWindow.document.getElementById("saveServiceLine").click();
   }, 2000);
+
+  return new Promise((resolve) => resolve("success"));
 };
 
 //function to iterate each cpt code
-let iterCpt = (month, day, year, cpts) => {
+let iterCpt = async (month, day, year, cpts) => {
   for (let j = 0; j < cpts.length; j++) {
-    setTimeout(fillLine(month, day, year, cpts[j]), 4000 * j);
+    let result = await fillLine(month, day, year, cpts[j]);
+    console.log(result);
   }
+  return new Promise((resolve) => {
+    resolve("Success");
+  });
 };
 
 //Function to iterate each date
-let fillDate = () => {
+let fillDate = async () => {
   for (let i = 0; i < dates.length; i++) {
     let [month, day, year] = dates[i].split("/");
 
     if (i == 0 && filter99203[0].checked) {
       let codes = cptChecked.filter((item) => item.label != 99213);
-      iterCpt(month, day, year, codes);
+      await iterCpt(month, day, year, codes);
     } else {
       let codes = cptChecked.filter((item) => item.label != 99203);
-      iterCpt(month, day, year, codes);
+      await iterCpt(month, day, year, codes);
     }
   }
 };
