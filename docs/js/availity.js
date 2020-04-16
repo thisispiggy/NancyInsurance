@@ -79,7 +79,7 @@ let fillLine = async (month, day, year, cpt) => {
     },
     {
       html: "diagnosisCodePointer1Container:diagnosisCodePointer4",
-      data: "3",
+      data: "4",
     },
   ];
 
