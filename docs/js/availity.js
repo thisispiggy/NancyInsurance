@@ -100,7 +100,7 @@ let fillLine = async (month, day, year, cpt) => {
     )[0].selectedIndex = object.data;
   });
 
-  await sleep(1000);
+  await sleep(2000);
 
   iframe.contentWindow.document.getElementById("saveServiceLine").click();
 };
