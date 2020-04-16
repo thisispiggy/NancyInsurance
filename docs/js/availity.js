@@ -105,7 +105,7 @@ let fillLine = async (month, day, year, cpt) => {
     1000
   );
 
-  await sleep(3000);
+  await sleep(1000);
 };
 
 //function to iterate each cpt code
