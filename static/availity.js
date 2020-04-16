@@ -102,10 +102,10 @@ let fillLine = async (month, day, year, cpt) => {
 
   setTimeout(
     iframe.contentWindow.document.getElementById("saveServiceLine").click(),
-    2000
+    1000
   );
 
-  await sleep(2000);
+  await sleep(3000);
 };
 
 //function to iterate each cpt code
@@ -133,6 +133,7 @@ let fillDate = async () => {
       console.log(result);
     }
   }
+  alert("Finished filling insurance");
 };
 
 if (BOOKMARK) {
