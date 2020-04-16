@@ -100,9 +100,12 @@ let fillLine = async (month, day, year, cpt) => {
     )[0].selectedIndex = object.data;
   });
 
-  await sleep(2000);
+  setTimeout(
+    iframe.contentWindow.document.getElementById("saveServiceLine").click(),
+    2000
+  );
 
-  iframe.contentWindow.document.getElementById("saveServiceLine").click();
+  await sleep(2000);
 };
 
 //function to iterate each cpt code
