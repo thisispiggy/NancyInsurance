@@ -5,55 +5,55 @@ function fillLine(month, day, year, line, cptCode) {
   let lineObjects = [
     {
       html: lineBase + "FM_DATE_OF_SVC_MONTH" + line,
-      data: month,
+      data: month
     },
     {
       html: lineBase + "FM_DATE_OF_SVC_DAY" + line,
-      data: day,
+      data: day
     },
     {
       html: lineBase + "FM_DATE_OF_SVC_YEAR" + line,
-      data: year,
+      data: year
     },
     {
       html: lineBase + "TO_DATE_OF_SVC_MONTH" + line,
-      data: month,
+      data: month
     },
     {
       html: lineBase + "TO_DATE_OF_SVC_DAY" + line,
-      data: day,
+      data: day
     },
     {
       html: lineBase + "TO_DATE_OF_SVC_YEAR" + line,
-      data: year,
+      data: year
     },
     {
       html: lineBase + "PLACE_OF_SVC" + line,
-      data: 11,
+      data: 11
     },
     {
       html: lineBase + "CPT_CODE" + line,
-      data: cptCode.label,
+      data: cptCode.label
     },
     {
       html: lineBase + "MODIFIER_A" + line,
-      data: cptCode.modifier,
+      data: cptCode.modifier
     },
     {
       html: lineBase + "DOS_DIAG_CODE" + line,
-      data: BOOKMARK.diagnosisCode,
+      data: BOOKMARK.diagnosisCode
     },
     {
       html: lineBase + "DOS_CHRG" + line,
-      data: cptCode.cost,
+      data: cptCode.cost
     },
     {
       html: lineBase + "UNITS" + line,
-      data: cptCode.unit,
-    },
+      data: cptCode.unit
+    }
   ];
   let iframe = document.getElementById("Iframe9");
-  lineObjects.forEach((object) => {
+  lineObjects.forEach(object => {
     // eslint-disable-next-line no-console
     console.log(object);
     iframe.contentWindow.document.querySelector(object.html).value =
@@ -67,7 +67,7 @@ function fillLine(month, day, year, line, cptCode) {
 BOOKMARK.fillDate = () => {
   // inputDates = BOOKMARK.dates.split("\n");
   inputDates = BOOKMARK.dates;
-  const cptCodes = BOOKMARK.cpt.filter((item) => item.checked == true);
+  const cptCodes = BOOKMARK.cpt.filter(item => item.checked == true);
   const rowNumbers = inputDates.length + cptCodes.length + 1;
   for (let i; i < rowNumbers; i++) {
     HCFALineItemTableManager.AddRows();
@@ -79,7 +79,7 @@ BOOKMARK.fillDate = () => {
     3: "ABC",
     4: "ABCD",
     5: "ABCDE",
-    6: "ABCDEF",
+    6: "ABCDEF"
   };
 
   BOOKMARK.diagnosisCode = letters[BOOKMARK.diagnosisCode];
@@ -89,15 +89,15 @@ BOOKMARK.fillDate = () => {
   console.log("all codes:" + cptCodes);
 
   let line = 0;
-  inputDates.forEach((date) => {
+  inputDates.forEach(date => {
     let month, day, year;
     [month, day, year] = date.split("/");
 
     if (line == 0) {
-      let codes = cptCodes.filter((cptCode) => {
+      let codes = cptCodes.filter(cptCode => {
         return cptCode.label != 99213;
       });
-      codes.forEach((cptCode) => {
+      codes.forEach(cptCode => {
         // eslint-disable-next-line no-console
         // console.log("99203" + cptCode);
         fillLine(month, day, year, line, cptCode);
@@ -106,11 +106,11 @@ BOOKMARK.fillDate = () => {
         console.log(line);
       });
     } else {
-      let codes = cptCodes.filter((cptCode) => {
+      let codes = cptCodes.filter(cptCode => {
         return cptCode.label != 99203;
       });
 
-      codes.forEach((cptCode) => {
+      codes.forEach(cptCode => {
         // eslint-disable-next-line no-console
         console.log("99213" + cptCode);
         fillLine(month, day, year, line, cptCode);

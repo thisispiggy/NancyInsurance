@@ -1,13 +1,12 @@
 /* eslint-disable no-console */
-// targets page's iframe
 // eslint-disable-next-line no-undef
-let iframe = document.getElementById("newBodyFrame");
+let iframe = document.getElementById("newBodyFrame"); // targets page's iframe
 // eslint-disable-next-line no-unused-vars
 let { website, dates, diagnosisCode, cpt } = BOOKMARK;
-// filters cpt code to only have list of 99203 and checked cpt
-let filter99203 = cpt.filter((cpt) => cpt.label == 99203);
-let cptChecked = cpt.filter((item) => item.checked == true);
+let filter99203 = cpt.filter((cpt) => cpt.label == 99203); // filters cpt code to only have 99203 for later use
+let cptChecked = cpt.filter((item) => item.checked == true); // filters checked cpt only
 
+// function for sleep
 let sleep = (time) => {
   return new Promise((resolve) => {
     setTimeout(resolve, time);
@@ -103,11 +102,6 @@ let fillLine = async (month, day, year, cpt) => {
 
   await sleep(1000);
 
-  //clicks save serve line
-  // setTimeout(() => {
-  //   iframe.contentWindow.document.getElementById("saveServiceLine").click();
-  // }, 1000);
-
   iframe.contentWindow.document.getElementById("saveServiceLine").click();
 };
 
@@ -117,7 +111,7 @@ let iterCpt = async (month, day, year, cpts) => {
     await fillLine(month, day, year, cpts[j]);
   }
   return new Promise((resolve) => {
-    resolve("Finished cpt");
+    resolve("Finished Cpt");
   });
 };
 
