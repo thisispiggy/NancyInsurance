@@ -3,47 +3,47 @@ function fillLine(month, day, year, line, cptCode) {
 
   let lineObjects = [
     {
-      html: `fromDateOfServiceMonth[${line}]`,
+      html: `'[name="fromDateOfServiceMonth[${line}]"]'`,
       data: month,
     },
     {
-      html: `fromDateOfServiceDay[${line}]`,
+      html: `'[name="fromDateOfServiceDay[${line}]"]'`,
       data: day,
     },
     {
-      html: `fromDateOfServiceYear[${line}]`,
+      html: `'[name="fromDateOfServiceYear[${line}]"]'`,
       data: year,
     },
     {
-      html: `toDateOfServiceMonth[${line}]`,
+      html: `'[name="toDateOfServiceMonth[${line}]"]'`,
       data: month,
     },
     {
-      html: `toDateOfServiceDay[${line}]`,
+      html: `'[name="toDateOfServiceDay[${line}]"]'`,
       data: day,
     },
     {
-      html: `toDateOfServiceYear[${line}]`,
+      html: `'[name="toDateOfServiceYear[${line}]"]'`,
       data: year,
     },
     {
-      html: `procedureCode[${line}]`,
+      html: `'[name="procedureCode[${line}]"]'`,
       data: cptCode.label,
     },
     {
-      html: `procedureModifierA[${line}]`,
+      html: `'[name="procedureModifierA[${line}]"]'`,
       data: cptCode.modifier,
     },
     {
-      html: `diagnosisCodeA[${line}]`,
+      html: `'[name="diagnosisCodeA[${line}]"]'`,
       data: BOOKMARK.diagnosisCode,
     },
     {
-      html: `chargeDollars[${line}]`,
+      html: `'[name="chargeDollars[${line}]"]'`,
       data: cptCode.cost,
     },
     {
-      html: `anesthesiaTimeUnits[${line}]`,
+      html: `'[name="anesthesiaTimeUnits[${line}]"]'`,
       data: cptCode.unit,
     },
   ];
@@ -54,9 +54,11 @@ function fillLine(month, day, year, line, cptCode) {
     iframe.contentWindow.document.querySelector(object.html).value =
       object.data;
   });
-  // Object.keys(lineObjects).forEach(item => {
-  //   iframe.contentWindow.document.querySelector(item).value = lineObjects[item];
-  // });
+  BOOKMARK.diagnosisCode.forEach((diagnosisCode) => {
+    iframe.contentWindow.document.querySelector(
+      `'[name="diagnosisCodeA[${line}]"]'`
+    ).value = line;
+  });
 }
 
 BOOKMARK.fillDate = () => {
