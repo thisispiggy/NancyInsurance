@@ -112,7 +112,7 @@ export default {
       website: "",
       dates: [],
       test: "",
-      sites: ["Availity", "OfficeAlly", "United Health Care"],
+      sites: ["Availity", "OfficeAlly", "MyVaCCN", "United Health Care"],
       diagnosis: [1, 2, 3, 4, 5],
       diagnosisCode: "",
       cpt: [
@@ -157,6 +157,13 @@ export default {
           modifier: "GP",
           cost: "50",
           unit: "1"
+        },
+        {
+          label: 97140,
+          checked: false,
+          modifier: "GP",
+          cost: "50",
+          unit: "1"
         }
       ],
       btnShow: false,
@@ -182,6 +189,10 @@ export default {
         case "OfficeAlly":
           initScriptUrl =
             "https://thisispiggy.github.io/NancyInsurance/js/officeally.js";
+          break;
+        case "MyVaCCN":
+          initScriptUrl =
+            "https://thisispiggy.github.io/NancyInsurance/js/myvaccn.js";
           break;
         default:
           initScriptUrl =

@@ -1,58 +1,53 @@
 function fillLine(month, day, year, line, cptCode) {
-  let lineBase =
-    "#ctl00_phFolderContent_ucHCFA_ucHCFALineItem_ucClaimLineItem_";
+  let lineBase = "#";
 
   let lineObjects = [
     {
-      html: lineBase + "FM_DATE_OF_SVC_MONTH" + line,
+      html: `fromDateOfServiceMonth[${line}]`,
       data: month,
     },
     {
-      html: lineBase + "FM_DATE_OF_SVC_DAY" + line,
+      html: `fromDateOfServiceDay[${line}]`,
       data: day,
     },
     {
-      html: lineBase + "FM_DATE_OF_SVC_YEAR" + line,
+      html: `fromDateOfServiceYear[${line}]`,
       data: year,
     },
     {
-      html: lineBase + "TO_DATE_OF_SVC_MONTH" + line,
+      html: `toDateOfServiceMonth[${line}]`,
       data: month,
     },
     {
-      html: lineBase + "TO_DATE_OF_SVC_DAY" + line,
+      html: `toDateOfServiceDay[${line}]`,
       data: day,
     },
     {
-      html: lineBase + "TO_DATE_OF_SVC_YEAR" + line,
+      html: `toDateOfServiceYear[${line}]`,
       data: year,
     },
     {
-      html: lineBase + "PLACE_OF_SVC" + line,
-      data: 11,
-    },
-    {
-      html: lineBase + "CPT_CODE" + line,
+      html: `procedureCode[${line}]`,
       data: cptCode.label,
     },
     {
-      html: lineBase + "MODIFIER_A" + line,
+      html: `procedureModifierA[${line}]`,
       data: cptCode.modifier,
     },
     {
-      html: lineBase + "DOS_DIAG_CODE" + line,
+      html: `diagnosisCodeA[${line}]`,
       data: BOOKMARK.diagnosisCode,
     },
     {
-      html: lineBase + "DOS_CHRG" + line,
+      html: `chargeDollars[${line}]`,
       data: cptCode.cost,
     },
     {
-      html: lineBase + "UNITS" + line,
+      html: `anesthesiaTimeUnits[${line}]`,
       data: cptCode.unit,
     },
   ];
-  let iframe = document.getElementById("Iframe9");
+  let iframe = document.getElementById("component1_ssoFrame");
   lineObjects.forEach((object) => {
     // eslint-disable-next-line no-console
     console.log(object);
@@ -73,16 +68,6 @@ BOOKMARK.fillDate = () => {
     HCFALineItemTableManager.AddRows();
   }
 
-  const letters = {
-    1: "A",
-    2: "AB",
-    3: "ABC",
-    4: "ABCD",
-    5: "ABCDE",
-    6: "ABCDEF",
-  };
-
-  BOOKMARK.diagnosisCode = letters[BOOKMARK.diagnosisCode];
   // eslint-disable-next-line no-console
   console.log("dates:" + inputDates);
   // eslint-disable-next-line no-console
