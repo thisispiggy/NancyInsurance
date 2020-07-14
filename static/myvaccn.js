@@ -1,4 +1,5 @@
 function fillLine(month, day, year, line, cptCode) {
+  // line html and data
   let lineObjects = [
     {
       html: `[name="fromDateOfServiceMonth[${line}]"]`,
@@ -45,10 +46,14 @@ function fillLine(month, day, year, line, cptCode) {
       data: cptCode.unit,
     },
   ];
+
+  // targets the iframe
   let iframe = document.getElementById("component1_ssoFrame");
+
+  // fills each lineobject
   lineObjects.forEach((object) => {
     // eslint-disable-next-line no-console
-    console.log(object);
+    console.log(object, line);
     iframe.contentWindow.document.querySelector(object.html).value =
       object.data;
   });
@@ -60,8 +65,9 @@ function fillLine(month, day, year, line, cptCode) {
 }
 
 BOOKMARK.fillDate = () => {
-  // inputDates = BOOKMARK.dates.split("\n");
   inputDates = BOOKMARK.dates;
+
+  // filters cptcodes to only have checked items
   const cptCodes = BOOKMARK.cpt.filter((item) => item.checked == true);
   const rowNumbers = inputDates.length + cptCodes.length + 1;
   for (let i; i < rowNumbers; i++) {
@@ -70,27 +76,31 @@ BOOKMARK.fillDate = () => {
 
   // eslint-disable-next-line no-console
   console.log("dates:" + inputDates);
-  // eslint-disable-next-line no-console
-  console.log("all codes:" + cptCodes);
 
   let line = 0;
+
+  // reiterates over each date
   inputDates.forEach((date) => {
     let month, day, year;
     [month, day, year] = date.split("/");
 
     if (line == 0) {
+      // filters out 99213 if new patient
       let codes = cptCodes.filter((cptCode) => {
         return cptCode.label != 99213;
       });
+
+      // reiterates for each procedural code
       codes.forEach((cptCode) => {
         // eslint-disable-next-line no-console
-        // console.log("99203" + cptCode);
+        console.log("99203" + cptCode);
         fillLine(month, day, year, line, cptCode);
         line++;
         // eslint-disable-next-line no-console
         console.log(line);
       });
     } else {
+      // filters out 99203 if old patient
       let codes = cptCodes.filter((cptCode) => {
         return cptCode.label != 99203;
       });
