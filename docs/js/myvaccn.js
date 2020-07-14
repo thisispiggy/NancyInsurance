@@ -57,14 +57,12 @@ function fillLine(month, day, year, line, cptCode) {
     iframe.contentWindow.document.querySelector(object.html).value =
       object.data;
   });
-  BOOKMARK.diagnosisCode.forEach((diagnosisCode) => {
-    iframe.contentWindow.document.querySelector(
-      `'[name="diagnosisCodeA[${line}]"]'`
-    ).value = line;
-  });
+  // BOOKMARK.diagnosisCode.forEach((diagnosisCode) => {
+  //   iframe.contentWindow.document.querySelector(
+  //     `[name="diagnosisCodeA[${line}]"]`
+  //   ).value = line;
+  // });
 }
-
-//test
 
 BOOKMARK.fillDate = () => {
   inputDates = BOOKMARK.dates;
