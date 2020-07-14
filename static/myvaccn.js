@@ -1,49 +1,47 @@
 function fillLine(month, day, year, line, cptCode) {
-  let lineBase = "#";
-
   let lineObjects = [
     {
-      html: `'[name="fromDateOfServiceMonth[${line}]"]'`,
+      html: `[name="fromDateOfServiceMonth[${line}]"]`,
       data: month,
     },
     {
-      html: `'[name="fromDateOfServiceDay[${line}]"]'`,
+      html: `[name="fromDateOfServiceDay[${line}]"]`,
       data: day,
     },
     {
-      html: `'[name="fromDateOfServiceYear[${line}]"]'`,
+      html: `[name="fromDateOfServiceYear[${line}]"]`,
       data: year,
     },
     {
-      html: `'[name="toDateOfServiceMonth[${line}]"]'`,
+      html: `[name="toDateOfServiceMonth[${line}]"]`,
       data: month,
     },
     {
-      html: `'[name="toDateOfServiceDay[${line}]"]'`,
+      html: `[name="toDateOfServiceDay[${line}]"]`,
       data: day,
     },
     {
-      html: `'[name="toDateOfServiceYear[${line}]"]'`,
+      html: `[name="toDateOfServiceYear[${line}]"]`,
       data: year,
     },
     {
-      html: `'[name="procedureCode[${line}]"]'`,
+      html: `[name="procedureCode[${line}]"]`,
       data: cptCode.label,
     },
     {
-      html: `'[name="procedureModifierA[${line}]"]'`,
+      html: `[name="procedureModifierA[${line}]"]`,
       data: cptCode.modifier,
     },
     {
-      html: `'[name="diagnosisCodeA[${line}]"]'`,
+      html: `[name="diagnosisCodeA[${line}]"]`,
       data: BOOKMARK.diagnosisCode,
     },
     {
-      html: `'[name="chargeDollars[${line}]"]'`,
+      html: `[name="chargeDollars[${line}]"]`,
       data: cptCode.cost,
     },
     {
-      html: `'[name="anesthesiaTimeUnits[${line}]"]'`,
+      html: `[name="anesthesiaTimeUnits[${line}]"]`,
       data: cptCode.unit,
     },
   ];
