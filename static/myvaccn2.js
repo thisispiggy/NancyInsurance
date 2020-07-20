@@ -91,11 +91,11 @@ let fillLine = async (month, day, year, cpt) => {
   });
 
   //fill the diagnosis code
-  lineDiagnosis.forEach((object) => {
-    iframe.contentWindow.document.getElementsByName(
-      object.html
-    )[0].selectedIndex = object.data;
-  });
+  // lineDiagnosis.forEach((object) => {
+  //   iframe.contentWindow.document.getElementsByName(
+  //     object.html
+  //   )[0].selectedIndex = object.data;
+  // });
 
   await sleep(1000)
     .then(console.log)
