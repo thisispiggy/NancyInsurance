@@ -45,11 +45,11 @@ let fillLine = async (month, day, year, cpt) => {
     },
     {
       html: `[name="procedureCode[${line}]"]`,
-      data: cptCode.label,
+      data: cpt.label,
     },
     {
       html: `[name="procedureModifierA[${line}]"]`,
-      data: cptCode.modifier,
+      data: cpt.modifier,
     },
     {
       html: `[name="diagnosisCodeA[${line}]"]`,
@@ -57,11 +57,11 @@ let fillLine = async (month, day, year, cpt) => {
     },
     {
       html: `[name="chargeDollars[${line}]"]`,
-      data: cptCode.cost,
+      data: cpt.cost,
     },
     {
       html: `[name="anesthesiaTimeUnits[${line}]"]`,
-      data: cptCode.unit,
+      data: cpt.unit,
     },
   ];
 
