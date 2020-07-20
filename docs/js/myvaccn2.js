@@ -6,7 +6,7 @@ let iframe = document.getElementById("component1_ssoFrame");
 let { website, dates, diagnosisCode, cpt } = BOOKMARK;
 let filter99203 = cpt.filter((cpt) => cpt.label == 99203); // filters cpt code to only have 99203 for later use
 let cptChecked = cpt.filter((item) => item.checked == true); // filters checked cpt only
-const line = 0;
+let line = 0;
 
 // function for sleep
 let sleep = (time) => {
@@ -86,7 +86,7 @@ let fillLine = async (month, day, year, cpt) => {
 
   //fill everything besides diagnosis code
   lineObjects.forEach((object) => {
-    iframe.contentWindow.document.getElementsByName(object.html).value =
+    iframe.contentWindow.document.querySelector(object.html).value =
       object.data;
   });
 
@@ -120,11 +120,13 @@ let fillDate = async () => {
     if (i == 0 && filter99203[0].checked) {
       let codes = cptChecked.filter((item) => item.label != 99213);
       let result = await iterCpt(month, day, year, codes);
+      line++;
       console.log(result);
     } else {
       let codes = cptChecked.filter((item) => item.label != 99203);
       let result = await iterCpt(month, day, year, codes);
       console.log(result);
+      line++;
     }
   }
   alert("Finished filling insurance");
