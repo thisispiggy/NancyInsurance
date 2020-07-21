@@ -9,11 +9,15 @@ let cptChecked = cpt.filter((item) => item.checked == true); // filters checked 
 let line = 0;
 
 // function for sleep
-let sleep = (time) => {
-  return new Promise((resolve) => {
+let sleep = (time) =>
+  new Promise((resolve) => {
     setTimeout(resolve, time);
-    resolve(`slept for ${time}`);
   });
+
+// function to run async sleep
+let timeOut = async (ms) => {
+  await sleep(ms);
+  console.log("slept for: ", ms);
 };
 
 //function to fill the page
@@ -97,35 +101,34 @@ let fillLine = async (month, day, year, cpt) => {
   //   )[0].selectedIndex = object.data;
   // });
 
-  await sleep(1000)
-    .then(console.log)
-    .catch((err) => console.log(err));
+  await timeOut(1000);
+  return new Promise((resolve) => resolve("Finished fillLine"));
 };
 
 //function to iterate each cpt code
 let iterCpt = async (month, day, year, cpts) => {
-  for (let j = 0; j < cpts.length; j++) {
-    await fillLine(month, day, year, cpts[j]);
+  for (const cpt of cpts) {
+    await fillLine(month, day, year, cpt);
   }
   return new Promise((resolve) => {
-    resolve("Finished Cpt");
+    resolve("Finished iterCpt");
   });
 };
 
 //Function to iterate each date
 let fillDate = async () => {
-  for (let i = 0; i < dates.length; i++) {
-    let [month, day, year] = dates[i].split("/");
+  for (const date of dates) {
+    let [month, day, year] = date.split("/");
 
-    if (i == 0 && filter99203[0].checked) {
+    if (line == 0 && filter99203[0].checked) {
       let codes = cptChecked.filter((item) => item.label != 99213);
       let result = await iterCpt(month, day, year, codes);
       line++;
-      console.log(result);
+      console.log(line, result);
     } else {
       let codes = cptChecked.filter((item) => item.label != 99203);
       let result = await iterCpt(month, day, year, codes);
-      console.log(result);
+      console.log(line, result);
       line++;
     }
   }
