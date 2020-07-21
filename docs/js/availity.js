@@ -1,70 +1,65 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line no-undef
-// targets page's iframe
-let iframe = document.getElementById("component1_ssoFrame");
+let iframe = document.getElementById("newBodyFrame"); // targets page's iframe
 // eslint-disable-next-line no-unused-vars
 let { website, dates, diagnosisCode, cpt } = BOOKMARK;
 let filter99203 = cpt.filter((cpt) => cpt.label == 99203); // filters cpt code to only have 99203 for later use
 let cptChecked = cpt.filter((item) => item.checked == true); // filters checked cpt only
-let line = 0;
 
 // function for sleep
-let sleep = (time) =>
-  new Promise((resolve) => {
+let sleep = (time) => {
+  return new Promise((resolve) => {
     setTimeout(resolve, time);
   });
-
-// function to run async sleep
-let timeOut = async (ms) => {
-  await sleep(ms);
-  console.log("slept for: ", ms);
 };
 
 //function to fill the page
 let fillLine = async (month, day, year, cpt) => {
+  let lineBase =
+    "componentListPanel:componentListView:30:component:claimLineForm:componentListPanel:componentListView:0:component:";
   let lineObjects = [
     {
-      html: `[name="fromDateOfServiceMonth[${line}]"]`,
+      html: "fromToDateContainer:fromDate:month",
       data: month,
     },
     {
-      html: `[name="fromDateOfServiceDay[${line}]"]`,
+      html: "fromToDateContainer:fromDate:day",
       data: day,
     },
     {
-      html: `[name="fromDateOfServiceYear[${line}]"]`,
+      html: "fromToDateContainer:fromDate:year",
       data: year,
     },
     {
-      html: `[name="toDateOfServiceMonth[${line}]"]`,
+      html: "fromToDateContainer:toDate:month",
       data: month,
     },
     {
-      html: `[name="toDateOfServiceDay[${line}]"]`,
+      html: "fromToDateContainer:toDate:day",
       data: day,
     },
     {
-      html: `[name="toDateOfServiceYear[${line}]"]`,
+      html: "fromToDateContainer:toDate:year",
       data: year,
     },
     {
-      html: `[name="procedureCode[${line}]"]`,
+      html: "servicePlaceContainer:servicePlace",
+      data: "11",
+    },
+    {
+      html: "procedureCodeContainer:procedureCode",
       data: cpt.label,
     },
     {
-      html: `[name="procedureModifierA[${line}]"]`,
+      html: "modifier1Container:modifier1",
       data: cpt.modifier,
     },
-    // {
-    //   html: `[name="diagnosisCodeA[${line}]"]`,
-    //   data: BOOKMARK.diagnosisCode,
-    // },
     {
-      html: `[name="chargeDollars[${line}]"]`,
+      html: "chargesContainer:charges",
       data: cpt.cost,
     },
     {
-      html: `[name="anesthesiaTimeUnits[${line}]"]`,
+      html: "numberContainer:number",
       data: cpt.unit,
     },
   ];
@@ -90,52 +85,52 @@ let fillLine = async (month, day, year, cpt) => {
 
   //fill everything besides diagnosis code
   lineObjects.forEach((object) => {
-    iframe.contentWindow.document.querySelector(object.html).value =
+    object.html = lineBase + object.html;
+
+    iframe.contentWindow.document.getElementsByName(object.html)[0].value =
       object.data;
   });
 
-  // fill the place of service
-  iframe.contentWindow.document.querySelector(
-    `[name="placeOfService[${line}]"]`
-  ).selectedIndex = 11;
-
   //fill the diagnosis code
-  // lineDiagnosis.forEach((object) => {
-  //   iframe.contentWindow.document.getElementsByName(
-  //     object.html
-  //   )[0].selectedIndex = object.data;
-  // });
+  lineDiagnosis.forEach((object) => {
+    object.html = lineBase + object.html;
 
-  await timeOut(1000);
-  return new Promise((resolve) => resolve("Finished fillLine", line, cpt));
+    iframe.contentWindow.document.getElementsByName(
+      object.html
+    )[0].selectedIndex = object.data;
+  });
+
+  setTimeout(
+    iframe.contentWindow.document.getElementById("saveServiceLine").click(),
+    1000
+  );
+
+  await sleep(1000);
 };
 
 //function to iterate each cpt code
 let iterCpt = async (month, day, year, cpts) => {
-  for (const cpt of cpts) {
-    let result = await fillLine(month, day, year, cpt);
-    console.log(result);
+  for (let j = 0; j < cpts.length; j++) {
+    await fillLine(month, day, year, cpts[j]);
   }
   return new Promise((resolve) => {
-    resolve("Finished iterCpt", month, day);
+    resolve("Finished Cpt");
   });
 };
 
 //Function to iterate each date
 let fillDate = async () => {
-  for (const date of dates) {
-    let [month, day, year] = date.split("/");
+  for (let i = 0; i < dates.length; i++) {
+    let [month, day, year] = dates[i].split("/");
 
-    if (line == 0 && filter99203[0].checked) {
+    if (i == 0 && filter99203[0].checked) {
       let codes = cptChecked.filter((item) => item.label != 99213);
       let result = await iterCpt(month, day, year, codes);
-      line++;
-      console.log(line, result);
+      console.log(result);
     } else {
       let codes = cptChecked.filter((item) => item.label != 99203);
       let result = await iterCpt(month, day, year, codes);
-      console.log(line, result);
-      line++;
+      console.log(result);
     }
   }
   alert("Finished filling insurance");

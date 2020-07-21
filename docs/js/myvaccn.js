@@ -97,7 +97,7 @@ let fillLine = async (month, day, year, cpt) => {
   // fill the place of service
   iframe.contentWindow.document.querySelector(
     `[name="placeOfService[${line}]"]`
-  ).selectedIndex = 11;
+  ).selectedIndex = 10;
 
   //fill the diagnosis code
   // lineDiagnosis.forEach((object) => {
@@ -114,6 +114,7 @@ let fillLine = async (month, day, year, cpt) => {
 let iterCpt = async (month, day, year, cpts) => {
   for (const cpt of cpts) {
     let result = await fillLine(month, day, year, cpt);
+    line++;
     console.log(result);
   }
   return new Promise((resolve) => {
@@ -129,13 +130,11 @@ let fillDate = async () => {
     if (line == 0 && filter99203[0].checked) {
       let codes = cptChecked.filter((item) => item.label != 99213);
       let result = await iterCpt(month, day, year, codes);
-      line++;
       console.log(line, result);
     } else {
       let codes = cptChecked.filter((item) => item.label != 99203);
       let result = await iterCpt(month, day, year, codes);
       console.log(line, result);
-      line++;
     }
   }
   alert("Finished filling insurance");

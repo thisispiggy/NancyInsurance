@@ -192,7 +192,7 @@ export default {
           break;
         case "MyVaCCN":
           initScriptUrl =
-            "https://thisispiggy.github.io/NancyInsurance/js/myvaccn2.js";
+            "https://thisispiggy.github.io/NancyInsurance/js/myvaccn.js";
           break;
         default:
           initScriptUrl =
