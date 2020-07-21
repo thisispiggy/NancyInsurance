@@ -55,10 +55,10 @@ let fillLine = async (month, day, year, cpt) => {
       html: `[name="procedureModifierA[${line}]"]`,
       data: cpt.modifier,
     },
-    {
-      html: `[name="diagnosisCodeA[${line}]"]`,
-      data: BOOKMARK.diagnosisCode,
-    },
+    // {
+    //   html: `[name="diagnosisCodeA[${line}]"]`,
+    //   data: BOOKMARK.diagnosisCode,
+    // },
     {
       html: `[name="chargeDollars[${line}]"]`,
       data: cpt.cost,
@@ -94,6 +94,11 @@ let fillLine = async (month, day, year, cpt) => {
       object.data;
   });
 
+  // fill the place of service
+  iframe.contentWindow.document.querySelector(
+    `[name="placeOfService[${line}]"]`
+  ).selectedIndex = 11;
+
   //fill the diagnosis code
   // lineDiagnosis.forEach((object) => {
   //   iframe.contentWindow.document.getElementsByName(
@@ -102,16 +107,17 @@ let fillLine = async (month, day, year, cpt) => {
   // });
 
   await timeOut(1000);
-  return new Promise((resolve) => resolve("Finished fillLine"));
+  return new Promise((resolve) => resolve("Finished fillLine", line, cpt));
 };
 
 //function to iterate each cpt code
 let iterCpt = async (month, day, year, cpts) => {
   for (const cpt of cpts) {
-    await fillLine(month, day, year, cpt);
+    let result = await fillLine(month, day, year, cpt);
+    console.log(result);
   }
   return new Promise((resolve) => {
-    resolve("Finished iterCpt");
+    resolve("Finished iterCpt", month, day);
   });
 };
 
