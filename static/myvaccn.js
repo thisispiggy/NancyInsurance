@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line no-undef
-// targets page's iframe
-let iframe = document.getElementById("component1_ssoFrame");
+
 // eslint-disable-next-line no-unused-vars
 let { website, dates, diagnosisCode, cpt } = BOOKMARK;
 let filter99203 = cpt.filter((cpt) => cpt.label == 99203); // filters cpt code to only have 99203 for later use
@@ -55,10 +54,6 @@ let fillLine = async (month, day, year, cpt) => {
       html: `[name="procedureModifierA[${line}]"]`,
       data: cpt.modifier,
     },
-    // {
-    //   html: `[name="diagnosisCodeA[${line}]"]`,
-    //   data: BOOKMARK.diagnosisCode,
-    // },
     {
       html: `[name="chargeDollars[${line}]"]`,
       data: cpt.cost,
@@ -88,6 +83,9 @@ let fillLine = async (month, day, year, cpt) => {
     },
   ];
 
+  // targets page's iframe
+  let iframe = document.getElementById("component1_ssoFrame");
+
   //fill everything besides diagnosis code
   lineObjects.forEach((object) => {
     iframe.contentWindow.document.querySelector(object.html).value =
@@ -105,7 +103,7 @@ let fillLine = async (month, day, year, cpt) => {
   //     object.html
   //   )[0].selectedIndex = object.data;
   // });
-
+  line++;
   await timeOut(1000);
   return new Promise((resolve) => resolve("Finished fillLine", line, cpt));
 };
@@ -114,7 +112,6 @@ let fillLine = async (month, day, year, cpt) => {
 let iterCpt = async (month, day, year, cpts) => {
   for (const cpt of cpts) {
     let result = await fillLine(month, day, year, cpt);
-    line++;
     console.log(result);
   }
   return new Promise((resolve) => {
