@@ -121,54 +121,54 @@ export default {
           checked: false,
           modifier: "25",
           cost: "75",
-          unit: "1"
+          unit: "1",
         },
         {
           label: 99213,
           checked: false,
           modifier: "25",
           cost: "55",
-          unit: "1"
+          unit: "1",
         },
         {
           label: 97813,
           checked: false,
           modifier: "",
           cost: "85",
-          unit: "1"
+          unit: "1",
         },
         {
           label: 97814,
           checked: false,
           modifier: "",
           cost: "210",
-          unit: "3"
+          unit: "3",
         },
         {
           label: 97026,
           checked: false,
           modifier: "GP",
           cost: "10",
-          unit: "1"
+          unit: "1",
         },
         {
           label: 97124,
           checked: false,
           modifier: "GP",
           cost: "50",
-          unit: "1"
+          unit: "1",
         },
         {
           label: 97140,
           checked: false,
           modifier: "GP",
           cost: "50",
-          unit: "1"
-        }
+          unit: "1",
+        },
       ],
       btnShow: false,
       script: "",
-      iframe: ""
+      iframe: "",
     };
   },
   methods: {
@@ -184,19 +184,19 @@ export default {
       switch (this.website) {
         case "Availity":
           initScriptUrl =
-            "https://thisispiggy.github.io/NancyInsurance/js/availity.js";
+            "https://kangruixiang.github.io/NancyInsurance/js/availity.js";
           break;
         case "OfficeAlly":
           initScriptUrl =
-            "https://thisispiggy.github.io/NancyInsurance/js/officeally.js";
+            "https://kangruixiang.github.io/NancyInsurance/js/officeally.js";
           break;
         case "MyVaCCN":
           initScriptUrl =
-            "https://thisispiggy.github.io/NancyInsurance/js/myvaccn.js";
+            "https://kangruixiang.github.io/NancyInsurance/js/myvaccn.js";
           break;
         default:
           initScriptUrl =
-            "https://thisispiggy.github.io/NancyInsurance/js/united.js";
+            "https://kangruixiang.github.io/NancyInsurance/js/united.js";
           break;
       }
 
@@ -204,7 +204,7 @@ export default {
         website: this.website,
         dates: this.formattedDate,
         diagnosisCode: this.diagnosisCode,
-        cpt: this.cpt
+        cpt: this.cpt,
       });
 
       this.bScript = encodeURIComponent(
@@ -214,7 +214,7 @@ export default {
     dobFormatter(dt) {
       let moment = require("moment");
       let result = new Array();
-      dt.forEach(dt => {
+      dt.forEach((dt) => {
         let date2 = moment(dt).format("MM/DD/YYYY");
         result.push(date2);
       });
@@ -222,20 +222,20 @@ export default {
       // console.log(result);
 
       return result;
-    }
+    },
   },
   computed: {
-    formattedDate: function() {
+    formattedDate: function () {
       let moment = require("moment");
 
       let result = new Array();
-      this.dates.forEach(date => {
+      this.dates.forEach((date) => {
         let date2 = moment(date).format("MM/DD/YYYY");
         result.push(date2);
       });
       return result;
-    }
-  }
+    },
+  },
 };
 </script>
 
